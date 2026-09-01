@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { motion, type Variants } from "framer-motion";
-import { Mail, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { Mail, ArrowUpRight, AlertCircle, CheckCircle2, Loader2, Sparkles } from "lucide-react";
 import { sendContactEmail } from "@/app/actions";
+import { contactSchema } from "@/app/lib/validations";
 
 function LinkedinIcon({ className = "size-4" }: { className?: string }) {
   return (
@@ -26,6 +27,12 @@ function GithubIcon({ className = "size-4" }: { className?: string }) {
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
+interface FieldErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
+
 const sectionVariant: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
@@ -33,18 +40,66 @@ const sectionVariant: Variants = {
 
 export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [globalMessage, setGlobalMessage] = useState<string>("");
+  const [formDataState, setFormDataState] = useState({ name: "", email: "", message: "" });
+
   const email = "maulanarandi531@gmail.com";
   const linkedinUrl = "https://www.linkedin.com/in/randi-maulana-dev";
   const githubUrl = "https://github.com/Jejekdf";
 
+  // Real-time field clearing when user types
+  const handleInputChange = (field: keyof typeof formDataState, value: string) => {
+    setFormDataState((prev) => ({ ...prev, [field]: value }));
+    if (fieldErrors[field]) {
+      setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+  };
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setGlobalMessage("");
+    setFieldErrors({});
+
+    // 1. Client-Side Instant Zod Pre-Validation
+    const clientValidation = contactSchema.safeParse({
+      name: formDataState.name,
+      email: formDataState.email,
+      message: formDataState.message,
+    });
+
+    if (!clientValidation.success) {
+      const errors: FieldErrors = {};
+      for (const issue of clientValidation.error.issues) {
+        const field = issue.path[0] as keyof FieldErrors;
+        if (field && !errors[field]) {
+          errors[field] = issue.message;
+        }
+      }
+      setFieldErrors(errors);
+      setStatus("error");
+      return;
+    }
+
+    // 2. Server-Side Execution with DNS MX & Rate Limiting
     setStatus("loading");
     const form = e.currentTarget;
-    const formData = new FormData(form);
-    const result = await sendContactEmail({ status: "", message: "" }, formData);
-    setStatus(result.status === "success" ? "success" : "error");
-    if (result.status === "success") form.reset();
+    const data = new FormData(form);
+
+    const result = await sendContactEmail({ status: "idle", message: "" }, data);
+
+    if (result.status === "success") {
+      setStatus("success");
+      setGlobalMessage(result.message);
+      setFormDataState({ name: "", email: "", message: "" });
+      form.reset();
+    } else {
+      setStatus("error");
+      setGlobalMessage(result.message);
+      if (result.fieldErrors) {
+        setFieldErrors(result.fieldErrors);
+      }
+    }
   }
 
   const directChannels = [
@@ -107,71 +162,187 @@ export function ContactForm() {
           </div>
         </div>
 
-        {/* Right Column: Minimalist Underline Form (Zero Box Prison) */}
-        <form onSubmit={handleSubmit} className="lg:col-span-7 flex flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="name" className="font-mono text-[11px] uppercase tracking-widest text-[#9e988f]">
-              Your Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              placeholder="e.g. Alex Morgan"
-              className="w-full bg-transparent border-b border-[#1e2a20] focus:border-[#c5a880] pb-3 text-base text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150"
-            />
-          </div>
+        {/* Right Column: Editorial Contact Form */}
+        <div className="lg:col-span-7 flex flex-col gap-8">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-8">
+            {/* Name Field */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <label htmlFor="name" className="font-mono text-[11px] uppercase tracking-widest text-[#9e988f]">
+                  Your Name
+                </label>
+                <span className="font-mono text-[10px] text-[#9e988f]/40">Required</span>
+              </div>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={formDataState.name}
+                onChange={(e) => handleInputChange("name", e.target.value)}
+                placeholder="e.g. Alex Morgan"
+                className={`w-full bg-transparent border-b pb-3 text-base text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
+                  fieldErrors.name
+                    ? "border-red-400/80 focus:border-red-400"
+                    : "border-[#1e2a20] focus:border-[#c5a880]"
+                }`}
+              />
+              <AnimatePresence>
+                {fieldErrors.name && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    className="font-mono text-xs text-red-400 mt-1 flex items-center gap-1.5"
+                  >
+                    <AlertCircle className="size-3.5 shrink-0" />
+                    <span>{fieldErrors.name}</span>
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="font-mono text-[11px] uppercase tracking-widest text-[#9e988f]">
-              Email Address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              placeholder="e.g. alex@company.com"
-              className="w-full bg-transparent border-b border-[#1e2a20] focus:border-[#c5a880] pb-3 text-base text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150"
-            />
-          </div>
+            {/* Email Field */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <label htmlFor="email" className="font-mono text-[11px] uppercase tracking-widest text-[#9e988f]">
+                  Email Address
+                </label>
+                <span className="font-mono text-[10px] text-[#9e988f]/40">Real Mailbox Verified</span>
+              </div>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formDataState.email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+                placeholder="e.g. alex@company.com"
+                className={`w-full bg-transparent border-b pb-3 text-base text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
+                  fieldErrors.email
+                    ? "border-red-400/80 focus:border-red-400"
+                    : "border-[#1e2a20] focus:border-[#c5a880]"
+                }`}
+              />
+              <AnimatePresence>
+                {fieldErrors.email && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    className="flex flex-col gap-1 mt-1"
+                  >
+                    <p className="font-mono text-xs text-red-400 flex items-center gap-1.5">
+                      <AlertCircle className="size-3.5 shrink-0" />
+                      <span>{fieldErrors.email}</span>
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="message" className="font-mono text-[11px] uppercase tracking-widest text-[#9e988f]">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              required
-              placeholder="Tell me about your project scope or engineering role..."
-              className="w-full bg-transparent border-b border-[#1e2a20] focus:border-[#c5a880] pb-3 text-base text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 resize-none"
-            />
-          </div>
+            {/* Message Field */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <label htmlFor="message" className="font-mono text-[11px] uppercase tracking-widest text-[#9e988f]">
+                  Message
+                </label>
+                <span className="font-mono text-[10px] text-[#9e988f]/40">Min 3 words / 15 chars</span>
+              </div>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                value={formDataState.message}
+                onChange={(e) => handleInputChange("message", e.target.value)}
+                placeholder="Tell me about your project scope or engineering role..."
+                className={`w-full bg-transparent border-b pb-3 text-base text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 resize-none ${
+                  fieldErrors.message
+                    ? "border-red-400/80 focus:border-red-400"
+                    : "border-[#1e2a20] focus:border-[#c5a880]"
+                }`}
+              />
+              <AnimatePresence>
+                {fieldErrors.message && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    className="font-mono text-xs text-red-400 mt-1 flex items-center gap-1.5"
+                  >
+                    <AlertCircle className="size-3.5 shrink-0" />
+                    <span>{fieldErrors.message}</span>
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              className="px-8 py-3.5 min-h-[44px] bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer self-start"
-            >
-              {status === "loading" ? "Sending..." : "Send Message"}
-            </button>
+            {/* Honeypot hidden input */}
+            <input type="text" name="honeypot" className="hidden" tabIndex={-1} autoComplete="off" />
 
-            {status === "success" && (
-              <p className="font-mono text-xs text-[#c5a880]">
-                Message sent successfully. I will get back to you shortly.
-              </p>
-            )}
-            {status === "error" && (
-              <p className="font-mono text-xs text-red-400">
-                Failed to send. Please reach out directly via email.
-              </p>
-            )}
-          </div>
-        </form>
+            {/* Submission CTAs and Status */}
+            <div className="flex flex-col gap-4 pt-2">
+              <div className="flex items-center gap-4">
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="inline-flex items-center gap-2 px-8 py-3.5 min-h-[44px] bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer self-start"
+                >
+                  {status === "loading" ? (
+                    <>
+                      <Loader2 className="size-3.5 animate-spin" />
+                      <span>Verifying &amp; Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <ArrowUpRight className="size-3.5" />
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Status Banners */}
+              <AnimatePresence>
+                {status === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="p-4 border border-[#c5a880]/30 bg-[#c5a880]/10 flex items-start gap-3"
+                  >
+                    <CheckCircle2 className="size-4 text-[#c5a880] shrink-0 mt-0.5" />
+                    <div className="flex flex-col gap-0.5">
+                      <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#c5a880]">
+                        Message Delivered Successfully
+                      </p>
+                      <p className="font-mono text-xs text-[#9e988f] leading-relaxed">
+                        {globalMessage || "Thank you for reaching out! I will get back to you shortly."}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {status === "error" && globalMessage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="p-4 border border-red-500/30 bg-red-500/10 flex items-start gap-3"
+                  >
+                    <AlertCircle className="size-4 text-red-400 shrink-0 mt-0.5" />
+                    <div className="flex flex-col gap-0.5">
+                      <p className="font-mono text-xs font-bold uppercase tracking-wider text-red-400">
+                        Verification Notice
+                      </p>
+                      <p className="font-mono text-xs text-red-300 leading-relaxed">
+                        {globalMessage}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </form>
+        </div>
       </div>
     </motion.section>
   );

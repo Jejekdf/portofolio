@@ -5,6 +5,16 @@ import { headers } from "next/headers";
 import { Resend } from "resend";
 import { contactSchema } from "@/app/lib/validations";
 
+export type ContactActionResult = {
+  status: "idle" | "success" | "error";
+  message: string;
+  fieldErrors?: {
+    name?: string;
+    email?: string;
+    message?: string;
+  };
+};
+
 // In-memory rate limiting map: { ip: [timestamp] }
 const rateLimitMap = new Map<string, number[]>();
 
@@ -59,9 +69,9 @@ function escapeHtml(text: string): string {
 }
 
 export async function sendContactEmail(
-  _prevState: { status: string; message: string },
+  _prevState: ContactActionResult,
   formData: FormData
-) {
+): Promise<ContactActionResult> {
   // 1. Silent Honeypot Bot Trap
   if (formData.get("honeypot")) {
     return { status: "error", message: "Bot detected." };
@@ -77,8 +87,15 @@ export async function sendContactEmail(
   });
 
   if (!parsed.success) {
-    const firstError = parsed.error.issues[0]?.message ?? "Invalid form input.";
-    return { status: "error", message: firstError };
+    const fieldErrors: Record<string, string> = {};
+    for (const issue of parsed.error.issues) {
+      const field = issue.path[0]?.toString();
+      if (field && !fieldErrors[field]) {
+        fieldErrors[field] = issue.message;
+      }
+    }
+    const firstError = parsed.error.issues[0]?.message ?? "Please correct the highlighted fields.";
+    return { status: "error", message: firstError, fieldErrors };
   }
 
   const { name, email, message } = parsed.data;
@@ -88,7 +105,10 @@ export async function sendContactEmail(
   if (!hasMxRecords) {
     return {
       status: "error",
-      message: "The email domain is invalid or does not have an active mail server. Please provide a real email address.",
+      message: "The email domain is invalid or does not have an active mail server.",
+      fieldErrors: {
+        email: "This email domain does not have active mail servers (MX records). Please provide a real address.",
+      },
     };
   }
 
@@ -156,7 +176,7 @@ export async function sendContactEmail(
 
     if (error) {
       console.error("Resend API error:", error);
-      return { status: "error", message: "Failed to send message. Please email directly." };
+      return { status: "error", message: "Failed to dispatch email. Please email directly." };
     }
 
     return { status: "success", message: "Message sent! I will get back to you shortly." };

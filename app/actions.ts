@@ -1,5 +1,6 @@
 "use server";
 
+import { promises as dns } from "dns";
 import { headers } from "next/headers";
 import { Resend } from "resend";
 import { contactSchema } from "@/app/lib/validations";
@@ -22,6 +23,31 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
+// Check if domain has active MX (Mail Exchange) records
+async function verifyEmailMxRecord(email: string): Promise<boolean> {
+  const domain = email.split("@")[1]?.toLowerCase().trim();
+  if (!domain) return false;
+
+  try {
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("DNS_TIMEOUT")), 2000)
+    );
+    const mxRecords = await Promise.race([
+      dns.resolveMx(domain),
+      timeoutPromise,
+    ]);
+    return Array.isArray(mxRecords) && mxRecords.length > 0;
+  } catch (err: unknown) {
+    const errorCode = (err as { code?: string })?.code;
+    // Reject non-existent domains or domains without mail servers
+    if (errorCode === "ENOTFOUND" || errorCode === "ENODATA" || errorCode === "ESERVFAIL") {
+      return false;
+    }
+    // Graceful fallback on network timeout to avoid blocking legitimate users
+    return true;
+  }
+}
+
 // Sanitize user inputs to prevent HTML/XSS injection into emails
 function escapeHtml(text: string): string {
   return text
@@ -41,7 +67,7 @@ export async function sendContactEmail(
     return { status: "error", message: "Bot detected." };
   }
 
-  // 2. Strict Zod Schema Validation
+  // 2. Strict Zod Schema Validation (Syntax, TLD & Disposable Blocklist)
   const parsed = contactSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -57,7 +83,16 @@ export async function sendContactEmail(
 
   const { name, email, message } = parsed.data;
 
-  // 3. Client IP Rate Limiting
+  // 3. DNS MX Record Verification (Verify domain can actually receive emails)
+  const hasMxRecords = await verifyEmailMxRecord(email);
+  if (!hasMxRecords) {
+    return {
+      status: "error",
+      message: "The email domain is invalid or does not have an active mail server. Please provide a real email address.",
+    };
+  }
+
+  // 4. Client IP Rate Limiting
   const headerList = await headers();
   const clientIp =
     headerList.get("x-forwarded-for")?.split(",")[0]?.trim() ||
@@ -71,7 +106,7 @@ export async function sendContactEmail(
     };
   }
 
-  // 4. Secure Resend Dispatch
+  // 5. Secure Resend Dispatch
   const apiKey = process.env.RESEND_API_KEY;
   const recipientEmail = process.env.CONTACT_TO_EMAIL || "maulanarandi531@gmail.com";
   const fromEmail = process.env.CONTACT_FROM_EMAIL || "Portfolio Contact <onboarding@resend.dev>";

@@ -85,13 +85,13 @@ export function CertificateGrid() {
         <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
           Credentials &amp; Certifications
         </h2>
-        <span className="font-mono text-[10px] text-[#9e988f] tracking-widest uppercase">
+        <span className="font-mono text-2xs text-[#9e988f] tracking-widest uppercase">
           {CERTIFICATES.length} Verified
         </span>
       </div>
 
       {/* Editorial Table Header */}
-      <div className="hidden sm:grid grid-cols-12 gap-4 pb-3 border-b border-[#1e2a20]/60 text-[#9e988f]/60 font-mono text-[10px] tracking-widest uppercase">
+      <div className="hidden sm:grid grid-cols-12 gap-4 pb-3 border-b border-[#1e2a20]/60 text-[#9e988f]/60 font-mono text-2xs tracking-widest uppercase">
         <span className="col-span-2">Issuer</span>
         <span className="col-span-5">Credential Title</span>
         <span className="col-span-4">Domain Focus</span>
@@ -115,7 +115,7 @@ export function CertificateGrid() {
                 {cert.issuer}
               </span>
               {cert.issueDate !== "Verified Credential" && (
-                <p className="font-mono text-[10px] text-[#9e988f]/60 mt-0.5">{cert.issueDate}</p>
+                <p className="font-mono text-2xs text-[#9e988f]/60 mt-0.5">{cert.issueDate}</p>
               )}
             </div>
 
@@ -126,7 +126,7 @@ export function CertificateGrid() {
             </div>
 
             <div className="sm:col-span-4">
-              <p className="font-mono text-[11px] text-[#9e988f] leading-relaxed">
+              <p className="font-mono text-xs-sub text-[#9e988f] leading-relaxed">
                 {cert.skills.join(" · ")}
               </p>
             </div>
@@ -137,7 +137,7 @@ export function CertificateGrid() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${cert.title} credential from ${cert.issuer}`}
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-start sm:justify-end text-[#c5a880] hover:text-[#f4f1eb] transition-colors duration-150"
+                className="min-h-11 min-w-11 inline-flex items-center justify-start sm:justify-end text-[#c5a880] hover:text-[#f4f1eb] transition-colors duration-150"
                 title="View Credential"
               >
                 <ExternalLink className="size-4 sm:size-3.5" />

@@ -51,7 +51,7 @@ export function SkillGrid() {
         <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
           Technical Capabilities
         </h2>
-        <span className="font-mono text-[10px] text-[#9e988f] tracking-widest uppercase">
+        <span className="font-mono text-2xs text-[#9e988f] tracking-widest uppercase">
           Stack Matrix
         </span>
       </div>

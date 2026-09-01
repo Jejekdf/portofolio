@@ -123,7 +123,7 @@ export function ContactForm() {
         <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
           Get in Touch
         </h2>
-        <span className="font-mono text-[10px] text-[#9e988f] tracking-widest uppercase">
+        <span className="font-mono text-2xs text-[#9e988f] tracking-widest uppercase">
           Open to Opportunities
         </span>
       </div>
@@ -148,7 +148,7 @@ export function ContactForm() {
                 href={href}
                 target={href.startsWith("mailto") ? undefined : "_blank"}
                 rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                className="group py-3.5 min-h-[44px] flex items-center justify-between text-[#9e988f] hover:text-[#c5a880] transition-colors duration-150"
+                className="group py-3.5 min-h-11 flex items-center justify-between text-[#9e988f] hover:text-[#c5a880] transition-colors duration-150"
               >
                 <div className="flex items-center gap-3">
                   {icon}
@@ -168,10 +168,10 @@ export function ContactForm() {
             {/* Name Field */}
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-between">
-                <label htmlFor="name" className="font-mono text-[11px] uppercase tracking-widest text-[#9e988f]">
+                <label htmlFor="name" className="font-mono text-xs-sub uppercase tracking-widest text-[#9e988f]">
                   Your Name
                 </label>
-                <span className="font-mono text-[10px] text-[#9e988f]/40">Required</span>
+                <span className="font-mono text-2xs text-[#9e988f]/40">Required</span>
               </div>
               <input
                 id="name"
@@ -204,10 +204,10 @@ export function ContactForm() {
             {/* Email Field */}
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-between">
-                <label htmlFor="email" className="font-mono text-[11px] uppercase tracking-widest text-[#9e988f]">
+                <label htmlFor="email" className="font-mono text-xs-sub uppercase tracking-widest text-[#9e988f]">
                   Email Address
                 </label>
-                <span className="font-mono text-[10px] text-[#9e988f]/40">Real Mailbox Verified</span>
+                <span className="font-mono text-2xs text-[#9e988f]/40">Real Mailbox Verified</span>
               </div>
               <input
                 id="email"
@@ -242,10 +242,10 @@ export function ContactForm() {
             {/* Message Field */}
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-between">
-                <label htmlFor="message" className="font-mono text-[11px] uppercase tracking-widest text-[#9e988f]">
+                <label htmlFor="message" className="font-mono text-xs-sub uppercase tracking-widest text-[#9e988f]">
                   Message
                 </label>
-                <span className="font-mono text-[10px] text-[#9e988f]/40">Min 3 words / 15 chars</span>
+                <span className="font-mono text-2xs text-[#9e988f]/40">Min 3 words / 15 chars</span>
               </div>
               <textarea
                 id="message"
@@ -284,7 +284,7 @@ export function ContactForm() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="inline-flex items-center gap-2 px-8 py-3.5 min-h-[44px] bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer self-start"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 min-h-11 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer self-start"
                 >
                   {status === "loading" ? (
                     <>

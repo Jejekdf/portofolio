@@ -84,7 +84,7 @@ export function HeroSection() {
               <span className="font-mono text-xs text-[#f4f1eb] font-medium tracking-wide">
                 Fullstack Software Engineer
               </span>
-              <span className="font-mono text-[10px] text-[#c5a880] tracking-wider uppercase">
+              <span className="font-mono text-2xs text-[#c5a880] tracking-wider uppercase">
                 Available for Work
               </span>
             </div>
@@ -96,7 +96,7 @@ export function HeroSection() {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[40px] sm:min-h-0 text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-10 sm:min-h-0 text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
             >
               <GithubIcon className="size-3.5" />
               <span>GitHub</span>
@@ -105,14 +105,14 @@ export function HeroSection() {
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[40px] sm:min-h-0 text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-10 sm:min-h-0 text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
             >
               <LinkedinIcon className="size-3.5" />
               <span>LinkedIn</span>
             </a>
             <a
               href={`mailto:${email}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[40px] sm:min-h-0 text-[#9e988f] hover:text-[#c5a880] font-mono text-xs tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-10 sm:min-h-0 text-[#9e988f] hover:text-[#c5a880] font-mono text-xs tracking-wider transition-colors duration-150"
             >
               <Mail className="size-3.5" />
               <span>Email</span>
@@ -142,7 +142,7 @@ export function HeroSection() {
         <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
           <button
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-7 py-3.5 min-h-[44px] bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 cursor-pointer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 min-h-11 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 cursor-pointer"
           >
             Explore Projects
             <ArrowUpRight className="size-3.5" />
@@ -151,14 +151,14 @@ export function HeroSection() {
             href="/CV_Randi.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[44px] border border-[#1e2a20] text-[#f4f1eb] font-mono text-xs tracking-widest uppercase hover:border-[#c5a880] hover:text-[#c5a880] transition-colors duration-150"
+            className="inline-flex items-center gap-2 px-6 py-3.5 min-h-11 border border-[#1e2a20] text-[#f4f1eb] font-mono text-xs tracking-widest uppercase hover:border-[#c5a880] hover:text-[#c5a880] transition-colors duration-150"
           >
             <FileText className="size-3.5" />
             <span>Download CV</span>
           </a>
           <a
             href={`mailto:${email}`}
-            className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[44px] text-[#9e988f] font-mono text-xs tracking-widest uppercase hover:text-[#f4f1eb] transition-colors duration-150"
+            className="inline-flex items-center gap-2 px-6 py-3.5 min-h-11 text-[#9e988f] font-mono text-xs tracking-widest uppercase hover:text-[#f4f1eb] transition-colors duration-150"
           >
             Get in Touch
           </a>

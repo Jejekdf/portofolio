@@ -74,7 +74,7 @@ export function ProjectGrid() {
         <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
           Featured Projects
         </h2>
-        <span className="font-mono text-[10px] text-[#9e988f] tracking-widest uppercase">
+        <span className="font-mono text-2xs text-[#9e988f] tracking-widest uppercase">
           {PROJECTS.length} Repositories
         </span>
       </div>
@@ -96,7 +96,7 @@ export function ProjectGrid() {
               <h3 className="font-mono text-base sm:text-lg font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-150 uppercase tracking-wide">
                 {project.title}
               </h3>
-              <p className="font-mono text-[11px] text-[#c5a880] mt-1.5 leading-relaxed">
+              <p className="font-mono text-xs-sub text-[#c5a880] mt-1.5 leading-relaxed">
                 {project.scope}
               </p>
             </div>
@@ -108,7 +108,7 @@ export function ProjectGrid() {
 
             {/* Tech Tags & Action Links */}
             <div className="lg:w-60 shrink-0 flex flex-col gap-3">
-              <p className="font-mono text-[11px] text-[#9e988f]/80 leading-relaxed">
+              <p className="font-mono text-xs-sub text-[#9e988f]/80 leading-relaxed">
                 {project.tags.join(" · ")}
               </p>
 
@@ -118,7 +118,7 @@ export function ProjectGrid() {
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 min-h-[44px] sm:min-h-0 font-mono text-xs uppercase tracking-wider text-[#c5a880] hover:text-[#f4f1eb] font-semibold transition-colors duration-150"
+                    className="inline-flex items-center gap-1 min-h-11 sm:min-h-0 font-mono text-xs uppercase tracking-wider text-[#c5a880] hover:text-[#f4f1eb] font-semibold transition-colors duration-150"
                   >
                     <span>Live Demo</span>
                     <ArrowUpRight className="size-3.5" />
@@ -128,7 +128,7 @@ export function ProjectGrid() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 min-h-[44px] sm:min-h-0 font-mono text-xs uppercase tracking-wider text-[#9e988f] hover:text-[#f4f1eb] transition-colors duration-150"
+                  className="inline-flex items-center gap-1 min-h-11 sm:min-h-0 font-mono text-xs uppercase tracking-wider text-[#9e988f] hover:text-[#f4f1eb] transition-colors duration-150"
                 >
                   <span>Source Code</span>
                   <ExternalLink className="size-3" />

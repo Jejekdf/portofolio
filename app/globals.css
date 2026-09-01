@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --text-2xs: 0.625rem;
+  --text-2xs--line-height: 0.875rem;
+  --text-xs-sub: 0.6875rem;
+  --text-xs-sub--line-height: 1rem;
+}
+
 @layer base {
   body {
     background-color: #090d0a;

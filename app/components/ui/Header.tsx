@@ -43,7 +43,7 @@ export function Header() {
             <span className="font-mono text-xs font-bold tracking-widest text-[#090d0a] bg-[#c5a880] px-2 py-0.5 group-hover:bg-[#f4f1eb] transition-colors duration-150">
               RM
             </span>
-            <span className="hidden sm:inline-block font-mono text-[11px] text-[#9e988f] tracking-wider uppercase group-hover:text-[#f4f1eb] transition-colors duration-150">
+            <span className="hidden sm:inline-block font-mono text-xs-sub text-[#9e988f] tracking-wider uppercase group-hover:text-[#f4f1eb] transition-colors duration-150">
               Fullstack Engineer
             </span>
           </button>
@@ -72,7 +72,7 @@ export function Header() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "Close menu" : "Open navigation"}
-            className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center text-[#9e988f] hover:text-[#f4f1eb] transition-colors duration-150 cursor-pointer"
+            className="md:hidden min-w-11 min-h-11 flex items-center justify-center text-[#9e988f] hover:text-[#f4f1eb] transition-colors duration-150 cursor-pointer"
           >
             {isOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -93,7 +93,7 @@ export function Header() {
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="w-full text-left py-3 min-h-[44px] flex items-center font-mono text-sm tracking-widest uppercase text-[#9e988f] hover:text-[#c5a880] transition-colors duration-150 cursor-pointer"
+                className="w-full text-left py-3 min-h-11 flex items-center font-mono text-sm tracking-widest uppercase text-[#9e988f] hover:text-[#c5a880] transition-colors duration-150 cursor-pointer"
               >
                 {label}
               </button>

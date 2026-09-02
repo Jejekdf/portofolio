@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { Mail, ArrowUpRight, AlertCircle, CheckCircle2, Loader2, Sparkles } from "lucide-react";
-import { sendContactEmail } from "@/app/actions";
-import { contactSchema } from "@/app/lib/validations";
+import { Mail, ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { sendContactEmail, type ContactActionResult } from "@/app/actions";
 
 function LinkedinIcon({ className = "size-4" }: { className?: string }) {
   return (
@@ -25,87 +24,76 @@ function GithubIcon({ className = "size-4" }: { className?: string }) {
   );
 }
 
-type FormStatus = "idle" | "loading" | "success" | "error";
-
-interface FieldErrors {
-  name?: string;
-  email?: string;
-  message?: string;
-}
+const CINEMATIC_EASE = [0.16, 1, 0.3, 1] as const;
 
 const sectionVariant: Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: CINEMATIC_EASE } },
 };
 
+interface FormState {
+  name: string;
+  email: string;
+  message: string;
+}
+
 export function ContactForm() {
-  const [status, setStatus] = useState<FormStatus>("idle");
-  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
-  const [globalMessage, setGlobalMessage] = useState<string>("");
-  const [formDataState, setFormDataState] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState<FormState>({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [globalMessage, setGlobalMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const email = "maulanarandi531@gmail.com";
   const linkedinUrl = "https://www.linkedin.com/in/randi-maulana-dev";
   const githubUrl = "https://github.com/Jejekdf";
 
-  // Real-time field clearing when user types
-  const handleInputChange = (field: keyof typeof formDataState, value: string) => {
-    setFormDataState((prev) => ({ ...prev, [field]: value }));
-    if (fieldErrors[field]) {
-      setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
+  const handleBlur = (field: keyof FormState) => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
     }
   };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setStatus("loading");
     setGlobalMessage("");
     setFieldErrors({});
 
-    // 1. Client-Side Instant Zod Pre-Validation
-    const clientValidation = contactSchema.safeParse({
-      name: formDataState.name,
-      email: formDataState.email,
-      message: formDataState.message,
-    });
-
-    if (!clientValidation.success) {
-      const errors: FieldErrors = {};
-      for (const issue of clientValidation.error.issues) {
-        const field = issue.path[0] as keyof FieldErrors;
-        if (field && !errors[field]) {
-          errors[field] = issue.message;
-        }
-      }
-      setFieldErrors(errors);
-      setStatus("error");
-      return;
-    }
-
-    // 2. Server-Side Execution with DNS MX & Rate Limiting
-    setStatus("loading");
-    const form = e.currentTarget;
-    const data = new FormData(form);
-
-    const result = await sendContactEmail({ status: "idle", message: "" }, data);
+    const data = new FormData(e.currentTarget);
+    const result: ContactActionResult = await sendContactEmail(
+      { status: "idle", message: "" },
+      data
+    );
 
     if (result.status === "success") {
       setStatus("success");
       setGlobalMessage(result.message);
-      setFormDataState({ name: "", email: "", message: "" });
-      form.reset();
+      setFormData({ name: "", email: "", message: "" });
+      setTouched({});
     } else {
       setStatus("error");
       setGlobalMessage(result.message);
       if (result.fieldErrors) {
-        setFieldErrors(result.fieldErrors);
+        setFieldErrors(result.fieldErrors as Record<string, string>);
       }
     }
   }
 
   const directChannels = [
-    { href: `mailto:${email}`, icon: <Mail className="size-4" />, label: email },
-    { href: linkedinUrl, icon: <LinkedinIcon className="size-4" />, label: "LinkedIn Profile" },
-    { href: githubUrl, icon: <GithubIcon className="size-4" />, label: "GitHub Profile" },
+    { title: "Direct Email", value: email, href: `mailto:${email}`, icon: <Mail className="size-4" /> },
+    { title: "Professional Network", value: "LinkedIn Profile", href: linkedinUrl, icon: <LinkedinIcon className="size-4" /> },
+    { title: "Source Repositories", value: "GitHub Profile", href: githubUrl, icon: <GithubIcon className="size-4" /> },
   ];
 
   return (
@@ -119,57 +107,72 @@ export function ContactForm() {
       viewport={{ once: true, margin: "-60px" }}
     >
       {/* Editorial Section Header */}
-      <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-12">
-        <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
-          Get in Touch
-        </h2>
-        <span className="font-mono text-2xs text-[#9e988f] tracking-widest uppercase">
-          Open to Opportunities
+      <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-10">
+        <div>
+          <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
+            Get In Touch
+          </h2>
+          <p className="font-mono text-2xs text-[#9e988f] mt-1">
+            Available for fullstack engineering roles and consulting
+          </p>
+        </div>
+        <span className="font-mono text-2xs text-[#c5a880] tracking-widest uppercase">
+          Open to Work
         </span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-        {/* Left Column: Direct Communication Channels */}
-        <div className="lg:col-span-5 flex flex-col justify-between gap-8">
-          <div className="flex flex-col gap-4">
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#f4f1eb] tracking-tight text-balance">
-              Let&apos;s build something exceptional together.
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        {/* Left Column: Direct Communication Cards */}
+        <div className="lg:col-span-5 flex flex-col gap-4">
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#0d120e]/80 border border-[#1e2a20] backdrop-blur-md flex flex-col gap-4">
+            <h3 className="font-mono text-lg font-bold text-[#f4f1eb] uppercase tracking-wide">
+              Direct Channels
             </h3>
-            <p className="text-sm sm:text-base text-[#9e988f] leading-relaxed text-pretty font-light">
-              Available for fullstack software engineering positions, architecture consulting, and high-impact freelance projects.
+            <p className="text-sm text-[#9e988f] leading-relaxed font-light">
+              Feel free to reach out directly via email or professional profiles.
             </p>
-          </div>
 
-          {/* Minimal Direct Links */}
-          <div className="flex flex-col divide-y divide-[#1e2a20]">
-            {directChannels.map(({ href, icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith("mailto") ? undefined : "_blank"}
-                rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                className="group py-3.5 min-h-11 flex items-center justify-between text-[#9e988f] hover:text-[#c5a880] transition-colors duration-150"
-              >
-                <div className="flex items-center gap-3">
-                  {icon}
-                  <span className="font-mono text-xs sm:text-sm text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-150">
-                    {label}
-                  </span>
-                </div>
-                <ArrowUpRight className="size-4 text-[#9e988f] group-hover:text-[#c5a880] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150" />
-              </a>
-            ))}
+            <div className="flex flex-col gap-3 pt-2">
+              {directChannels.map(({ title, value, href, icon }) => (
+                <a
+                  key={title}
+                  href={href}
+                  target={href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                  className="group p-3.5 rounded-xl bg-[#090d0a]/60 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-200 flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="size-8 rounded-lg bg-[#1e2a20]/60 border border-[#1e2a20] flex items-center justify-center text-[#c5a880] group-hover:scale-105 transition-transform">
+                      {icon}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-2xs uppercase tracking-wider text-[#9e988f]/70">
+                        {title}
+                      </span>
+                      <span className="font-mono text-xs text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors">
+                        {value}
+                      </span>
+                    </div>
+                  </div>
+                  <ArrowUpRight className="size-4 text-[#9e988f] group-hover:text-[#c5a880] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Right Column: Editorial Contact Form */}
-        <div className="lg:col-span-7 flex flex-col gap-8">
-          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-8">
+        {/* Right Column: Best-Practice Structured Form */}
+        <div className="lg:col-span-7">
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            className="p-6 sm:p-8 rounded-2xl bg-[#0d120e]/80 border border-[#1e2a20] backdrop-blur-md flex flex-col gap-5 shadow-2xl"
+          >
             {/* Name Field */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label htmlFor="name" className="font-mono text-xs-sub uppercase tracking-widest text-[#9e988f]">
-                  Your Name
+                <label htmlFor="name" className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold">
+                  Name
                 </label>
                 <span className="font-mono text-2xs text-[#9e988f]/40">Required</span>
               </div>
@@ -177,145 +180,129 @@ export function ContactForm() {
                 id="name"
                 name="name"
                 type="text"
-                value={formDataState.name}
-                onChange={(e) => handleInputChange("name", e.target.value)}
-                placeholder="e.g. Alex Morgan"
-                className={`w-full bg-transparent border-b pb-3 text-base text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
+                value={formData.name}
+                onChange={handleChange}
+                onBlur={() => handleBlur("name")}
+                placeholder="Your full name"
+                required
+                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
                   fieldErrors.name
-                    ? "border-red-400/80 focus:border-red-400"
+                    ? "border-red-500/80 focus:border-red-500"
+                    : touched.name && formData.name.length >= 2
+                    ? "border-[#c5a880]/60 focus:border-[#c5a880]"
                     : "border-[#1e2a20] focus:border-[#c5a880]"
                 }`}
               />
-              <AnimatePresence>
-                {fieldErrors.name && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    className="font-mono text-xs text-red-400 mt-1 flex items-center gap-1.5"
-                  >
-                    <AlertCircle className="size-3.5 shrink-0" />
-                    <span>{fieldErrors.name}</span>
-                  </motion.p>
-                )}
-              </AnimatePresence>
+              {fieldErrors.name && (
+                <span className="font-mono text-2xs text-red-400">
+                  {fieldErrors.name}
+                </span>
+              )}
             </div>
 
             {/* Email Field */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label htmlFor="email" className="font-mono text-xs-sub uppercase tracking-widest text-[#9e988f]">
-                  Email Address
+                <label htmlFor="email" className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold">
+                  Email
                 </label>
-                <span className="font-mono text-2xs text-[#9e988f]/40">Real Mailbox Verified</span>
+                <span className="font-mono text-2xs text-[#9e988f]/40">Required</span>
               </div>
               <input
                 id="email"
                 name="email"
                 type="email"
-                value={formDataState.email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-                placeholder="e.g. alex@company.com"
-                className={`w-full bg-transparent border-b pb-3 text-base text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
+                value={formData.email}
+                onChange={handleChange}
+                onBlur={() => handleBlur("email")}
+                placeholder="name@company.com"
+                required
+                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
                   fieldErrors.email
-                    ? "border-red-400/80 focus:border-red-400"
+                    ? "border-red-500/80 focus:border-red-500"
+                    : touched.email && formData.email.includes("@")
+                    ? "border-[#c5a880]/60 focus:border-[#c5a880]"
                     : "border-[#1e2a20] focus:border-[#c5a880]"
                 }`}
               />
-              <AnimatePresence>
-                {fieldErrors.email && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    className="flex flex-col gap-1 mt-1"
-                  >
-                    <p className="font-mono text-xs text-red-400 flex items-center gap-1.5">
-                      <AlertCircle className="size-3.5 shrink-0" />
-                      <span>{fieldErrors.email}</span>
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {fieldErrors.email && (
+                <span className="font-mono text-2xs text-red-400">
+                  {fieldErrors.email}
+                </span>
+              )}
             </div>
 
             {/* Message Field */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label htmlFor="message" className="font-mono text-xs-sub uppercase tracking-widest text-[#9e988f]">
+                <label htmlFor="message" className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold">
                   Message
                 </label>
-                <span className="font-mono text-2xs text-[#9e988f]/40">Min 3 words / 15 chars</span>
+                <span className="font-mono text-2xs text-[#9e988f]/40">Min 3 words</span>
               </div>
               <textarea
                 id="message"
                 name="message"
                 rows={4}
-                value={formDataState.message}
-                onChange={(e) => handleInputChange("message", e.target.value)}
-                placeholder="Tell me about your project scope or engineering role..."
-                className={`w-full bg-transparent border-b pb-3 text-base text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 resize-none ${
+                value={formData.message}
+                onChange={handleChange}
+                onBlur={() => handleBlur("message")}
+                placeholder="Project details, timeline, or engineering role"
+                required
+                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none resize-none transition-colors duration-150 ${
                   fieldErrors.message
-                    ? "border-red-400/80 focus:border-red-400"
+                    ? "border-red-500/80 focus:border-red-500"
+                    : touched.message && formData.message.split(/\s+/).filter(Boolean).length >= 3
+                    ? "border-[#c5a880]/60 focus:border-[#c5a880]"
                     : "border-[#1e2a20] focus:border-[#c5a880]"
                 }`}
               />
-              <AnimatePresence>
-                {fieldErrors.message && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    className="font-mono text-xs text-red-400 mt-1 flex items-center gap-1.5"
-                  >
-                    <AlertCircle className="size-3.5 shrink-0" />
-                    <span>{fieldErrors.message}</span>
-                  </motion.p>
-                )}
-              </AnimatePresence>
+              {fieldErrors.message && (
+                <span className="font-mono text-2xs text-red-400">
+                  {fieldErrors.message}
+                </span>
+              )}
             </div>
 
             {/* Honeypot hidden input */}
             <input type="text" name="honeypot" className="hidden" tabIndex={-1} autoComplete="off" />
 
-            {/* Submission CTAs and Status */}
-            <div className="flex flex-col gap-4 pt-2">
-              <div className="flex items-center gap-4">
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="inline-flex items-center gap-2 px-8 py-3.5 min-h-11 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer self-start"
-                >
-                  {status === "loading" ? (
-                    <>
-                      <Loader2 className="size-3.5 animate-spin" />
-                      <span>Verifying &amp; Sending...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Send Message</span>
-                      <ArrowUpRight className="size-3.5" />
-                    </>
-                  )}
-                </button>
-              </div>
+            {/* Submit Button */}
+            <div className="pt-2 flex flex-col gap-3">
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest rounded-lg hover:bg-[#f4f1eb] transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer self-start shadow-md"
+              >
+                {status === "loading" ? (
+                  <>
+                    <Loader2 className="size-3.5 animate-spin" />
+                    <span>Sending</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Send Message</span>
+                    <ArrowUpRight className="size-3.5" />
+                  </>
+                )}
+              </button>
 
-              {/* Status Banners */}
+              {/* Status Notifications */}
               <AnimatePresence>
                 {status === "success" && (
                   <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    className="p-4 border border-[#c5a880]/30 bg-[#c5a880]/10 flex items-start gap-3"
+                    className="p-4 rounded-lg border border-[#c5a880]/30 bg-[#c5a880]/10 flex items-start gap-3"
                   >
                     <CheckCircle2 className="size-4 text-[#c5a880] shrink-0 mt-0.5" />
                     <div className="flex flex-col gap-0.5">
                       <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#c5a880]">
-                        Message Delivered Successfully
+                        Message Sent
                       </p>
-                      <p className="font-mono text-xs text-[#9e988f] leading-relaxed">
-                        {globalMessage || "Thank you for reaching out! I will get back to you shortly."}
+                      <p className="font-mono text-xs text-[#9e988f]">
+                        {globalMessage || "Thank you for reaching out. I will respond shortly."}
                       </p>
                     </div>
                   </motion.div>
@@ -326,14 +313,14 @@ export function ContactForm() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    className="p-4 border border-red-500/30 bg-red-500/10 flex items-start gap-3"
+                    className="p-4 rounded-lg border border-red-500/30 bg-red-500/10 flex items-start gap-3"
                   >
                     <AlertCircle className="size-4 text-red-400 shrink-0 mt-0.5" />
                     <div className="flex flex-col gap-0.5">
                       <p className="font-mono text-xs font-bold uppercase tracking-wider text-red-400">
-                        Verification Notice
+                        Notice
                       </p>
-                      <p className="font-mono text-xs text-red-300 leading-relaxed">
+                      <p className="font-mono text-xs text-red-300">
                         {globalMessage}
                       </p>
                     </div>

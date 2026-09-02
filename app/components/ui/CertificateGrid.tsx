@@ -71,13 +71,13 @@ const CERTIFICATES: Certificate[] = [
     skills: ["Cyber Threat Intelligence", "Network Defense", "Security Policies"],
   },
   {
-    id: "google-maju-bareng-ai",
+    id: "hacktiv8-maju-bareng-ai",
     title: "Maju Bareng AI Program",
-    issuer: "Google",
+    issuer: "Hacktiv8",
     issueDate: "Verified Credential",
     credentialUrl: "https://www.linkedin.com/in/randi-maulana-dev",
-    image: "/certificates/google-maju-bareng-ai.webp",
-    skills: ["Artificial Intelligence", "Google Cloud ML", "Generative AI"],
+    image: "/certificates/hacktiv8-maju-bareng-ai.webp",
+    skills: ["Artificial Intelligence", "Generative AI", "Developer Tools"],
   },
   {
     id: "komdigi-digital-talent",

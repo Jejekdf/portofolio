@@ -15,6 +15,7 @@ export interface Certificate {
   issuer: string;
   issueDate: string;
   credentialUrl: string;
+  image?: string;
   skills: string[];
 }
 

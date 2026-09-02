@@ -3,10 +3,13 @@ export type SectionId = "hero" | "projects" | "certificates" | "skills" | "conta
 export interface Project {
   id: string;
   title: string;
+  scope?: string;
   description: string;
   tags: string[];
   github: string;
   demo?: string;
+  featured?: boolean;
+  metrics?: string;
 }
 
 export interface Certificate {
@@ -17,6 +20,7 @@ export interface Certificate {
   credentialUrl: string;
   image?: string;
   skills: string[];
+  competencies?: string[];
 }
 
 export interface ContactFormState {

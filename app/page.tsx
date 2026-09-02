@@ -7,6 +7,7 @@ import { CertificateGrid } from "@/app/components/ui/CertificateGrid";
 import { SkillGrid } from "@/app/components/ui/SkillGrid";
 import { ContactForm } from "@/app/components/ui/ContactForm";
 import { Footer } from "@/app/components/ui/Footer";
+import { CinematicSpotlight } from "@/app/components/ui/CinematicSpotlight";
 import { useScrollSpy } from "@/app/hooks/useScrollSpy";
 
 export default function Home() {
@@ -14,6 +15,9 @@ export default function Home() {
 
   return (
     <>
+      {/* Ambient Cursor Spotlight across the deep obsidian canvas */}
+      <CinematicSpotlight />
+
       <Header />
       <main className="relative z-10">
         <HeroSection />

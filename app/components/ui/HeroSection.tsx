@@ -23,29 +23,26 @@ function GithubIcon({ className = "size-4" }: { className?: string }) {
   );
 }
 
-const HeroCanvas = dynamic(
-  () => import("@/app/components/canvas/Scene").then((m) => m.Scene),
+const Hero3DCanvas = dynamic(
+  () => import("@/app/components/canvas/Hero3DCanvas").then((m) => m.Hero3DCanvas),
   { ssr: false }
 );
 
-const ParticleField = dynamic(
-  () => import("@/app/components/canvas/ParticleField").then((m) => m.ParticleField),
-  { ssr: false }
-);
+const CINEMATIC_EASE = [0.16, 1, 0.3, 1] as const;
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
 };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
-  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.65, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
+  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.85, ease: CINEMATIC_EASE } },
 };
 
 const nameVariant: Variants = {
-  hidden: { opacity: 0, y: 35, filter: "blur(8px)" },
-  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.85, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
+  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1.1, ease: CINEMATIC_EASE } },
 };
 
 export function HeroSection() {
@@ -56,14 +53,11 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 pb-12 sm:pb-20 overflow-hidden"
+      className="relative max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden"
       aria-label="About"
     >
-      {/* Interactive Background Canvas (3D Spatial Backdrop + Particles) */}
-      <div className="absolute inset-0 pointer-events-none -z-0">
-        <ParticleField />
-        <HeroCanvas />
-      </div>
+      {/* Interactive 3D Quantum Sculpture Focal Point */}
+      <Hero3DCanvas />
 
       <motion.div
         variants={container}
@@ -71,18 +65,18 @@ export function HeroSection() {
         animate="show"
         className="relative z-10 flex flex-col gap-10 sm:gap-14"
       >
-        {/* Top Status & Role Meta */}
+        {/* Top Status & Avatar Meta (No bullets/dots, perfectly matched title) */}
         <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <img
               src="/profile.webp"
-              alt="Profile photo"
+              alt="Randi Maulana"
               className="size-10 sm:size-11 object-cover rounded-full border border-[#1e2a20]"
               loading="eager"
             />
-            <div className="flex flex-col">
-              <span className="font-mono text-xs text-[#f4f1eb] font-medium tracking-wide">
-                Fullstack Software Engineer
+            <div className="flex flex-col gap-0.5">
+              <span className="font-mono text-xs text-[#f4f1eb] font-semibold tracking-wide">
+                Randi Maulana
               </span>
               <span className="font-mono text-2xs text-[#c5a880] tracking-wider uppercase">
                 Available for Work
@@ -134,17 +128,17 @@ export function HeroSection() {
             variants={fadeUp}
             className="text-base sm:text-lg lg:text-xl text-[#9e988f] max-w-2xl leading-relaxed text-pretty font-light"
           >
-            Building robust web applications, high-concurrency backend APIs, and modern database architectures with Next.js 16, React 19, TypeScript, PHP, Laravel, and PostgreSQL.
+            Fullstack software engineer specialized in high-performance web systems, resilient backend APIs, and scalable database architectures using Next.js 16, React 19, TypeScript, PHP, Laravel, and PostgreSQL.
           </motion.p>
         </div>
 
-        {/* Action CTAs */}
+        {/* Action-Oriented CTAs */}
         <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
           <button
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-7 py-3.5 min-h-11 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 cursor-pointer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 min-h-11 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 cursor-pointer shadow-lg shadow-[#c5a880]/10"
           >
-            Explore Projects
+            View Projects
             <ArrowUpRight className="size-3.5" />
           </button>
           <a
@@ -154,13 +148,7 @@ export function HeroSection() {
             className="inline-flex items-center gap-2 px-6 py-3.5 min-h-11 border border-[#1e2a20] text-[#f4f1eb] font-mono text-xs tracking-widest uppercase hover:border-[#c5a880] hover:text-[#c5a880] transition-colors duration-150"
           >
             <FileText className="size-3.5" />
-            <span>Download CV</span>
-          </a>
-          <a
-            href={`mailto:${email}`}
-            className="inline-flex items-center gap-2 px-6 py-3.5 min-h-11 text-[#9e988f] font-mono text-xs tracking-widest uppercase hover:text-[#f4f1eb] transition-colors duration-150"
-          >
-            Get in Touch
+            <span>Download Resume</span>
           </a>
         </motion.div>
       </motion.div>

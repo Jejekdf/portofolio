@@ -10,7 +10,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full antialiased scroll-smooth">
-      <body className="min-h-dvh flex flex-col bg-[#090d0a] text-[#f4f1eb] font-sans overflow-x-hidden">
+      <body className="min-h-dvh flex flex-col bg-[#090d0a] text-[#f4f1eb] font-sans overflow-x-hidden relative">
+        {/* Cinematic Film Texture Overlay */}
+        <div
+          className="fixed inset-0 pointer-events-none z-50 cinematic-film-grain"
+          aria-hidden="true"
+        />
         {children}
       </body>
     </html>

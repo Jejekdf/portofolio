@@ -203,9 +203,9 @@ export function CertificateGrid() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-20px" }}
-            className="group relative rounded-xl bg-[#0d120e]/80 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-300 backdrop-blur-md overflow-hidden flex flex-col justify-between h-full"
+            className="group relative rounded-xl bg-[#0d120e]/80 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-300 overflow-hidden flex flex-col justify-between h-full"
           >
-            {/* Visual Thumbnail Header */}
+            {/* Visual Thumbnail Header (Optimized Lazy Loading) */}
             {cert.image && (
               <div
                 onClick={() => setSelectedCert(cert)}
@@ -215,22 +215,22 @@ export function CertificateGrid() {
                   src={cert.image}
                   alt={`${cert.title} preview`}
                   fill
+                  loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d120e] via-transparent to-transparent opacity-60 pointer-events-none" />
-                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-[#090d0a]/90 border border-[#1e2a20] text-[#c5a880] font-mono text-2xs uppercase tracking-wider inline-flex items-center gap-1 backdrop-blur-sm">
+                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-[#090d0a]/90 border border-[#1e2a20] text-[#c5a880] font-mono text-2xs uppercase tracking-wider inline-flex items-center gap-1">
                   <Eye className="size-3" />
                   <span>View Details</span>
                 </div>
               </div>
             )}
 
-            {/* Card Body with responsive author display */}
+            {/* Card Body: Perfectly Level Across All Cards (h-8 author + h-10 title) */}
             <div className="p-5 flex flex-col flex-1 justify-between gap-4">
-              {/* Upper Block: Issuer + Title (Adaptable height without author truncation) */}
-              <div className="flex flex-col gap-2">
-                <div className="flex items-start justify-between gap-2 min-h-4">
+              <div className="flex flex-col gap-1.5">
+                <div className="h-8 flex items-start justify-between gap-2">
                   <span className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold leading-tight">
                     {cert.issuer}
                   </span>
@@ -275,14 +275,14 @@ export function CertificateGrid() {
       {/* Cinematic Modal Lightbox with Safe-Area Mobile Layout */}
       <AnimatePresence>
         {selectedCert && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center px-3 sm:px-6 lg:px-10 pt-[calc(env(safe-area-inset-top)+1rem)] pb-[calc(env(safe-area-inset-bottom)+1rem)] overflow-y-auto">
-            {/* Backdrop */}
+          <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-6 lg:p-10 pt-[calc(env(safe-area-inset-top)+1rem)] pb-[calc(env(safe-area-inset-bottom)+1.5rem)] overflow-y-auto">
+            {/* Backdrop: Solid high-performance dark overlay (No heavy backdrop-blur GPU thrashing) */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedCert(null)}
-              className="fixed inset-0 bg-[#090d0a]/90 backdrop-blur-md cursor-pointer"
+              className="fixed inset-0 bg-[#090d0a]/95 cursor-pointer"
             />
 
             {/* Modal Box */}
@@ -291,10 +291,10 @@ export function CertificateGrid() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 16 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative z-10 max-w-4xl w-full my-auto bg-[#0d120e] border border-[#1e2a20] shadow-2xl rounded-2xl overflow-hidden flex flex-col max-h-[90dvh]"
+              className="relative z-10 max-w-4xl w-full my-auto bg-[#0d120e] border border-[#1e2a20] shadow-2xl rounded-2xl overflow-hidden flex flex-col max-h-[88dvh]"
             >
               {/* Sticky Modal Header with Accessible 44px Close Button */}
-              <div className="sticky top-0 z-30 flex items-start sm:items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#1e2a20] bg-[#090d0a]/95 backdrop-blur-md shrink-0 gap-3">
+              <div className="sticky top-0 z-30 flex items-start sm:items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#1e2a20] bg-[#090d0a] shrink-0 gap-3">
                 <div className="flex flex-col gap-0.5 flex-1 min-w-0 pr-1">
                   <span className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold leading-tight">
                     {selectedCert.issuer}
@@ -328,7 +328,7 @@ export function CertificateGrid() {
                   </div>
                 )}
 
-                {/* Comprehensive Competencies Learned (No (), -, or / symbols) */}
+                {/* Comprehensive Competencies Learned */}
                 <div className="p-5 sm:p-8 flex flex-col gap-6 bg-[#0d120e]">
                   <div className="flex flex-col gap-3">
                     <h4 className="font-mono text-xs uppercase tracking-widest text-[#f4f1eb] font-bold">

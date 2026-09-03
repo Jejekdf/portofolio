@@ -29,33 +29,29 @@ export function Hero3DCanvas() {
     renderer.setSize(container.clientWidth, container.clientHeight, false);
     container.appendChild(renderer.domElement);
 
-    // 3. Cinematic Studio Lighting Setup (Chiaroscuro Drama)
+    // 3. Studio Lighting Setup
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
 
-    // Key Light (Chalk White)
     const keyLight = new THREE.DirectionalLight(0xf4f1eb, 3.2);
     keyLight.position.set(6, 6, 5);
     scene.add(keyLight);
 
-    // Fill Light (Warm Champagne)
     const fillLight = new THREE.DirectionalLight(0xc5a880, 1.4);
     fillLight.position.set(-6, -4, -3);
     scene.add(fillLight);
 
-    // Golden Rim Point Light
     const rimLight = new THREE.PointLight(0xc5a880, 4.5, 12);
     rimLight.position.set(2, -2, -2.5);
     scene.add(rimLight);
 
     // 4. 3D Architectural Quantum Sculpture Group
     const group = new THREE.Group();
-    // Position to the right on desktop, centered on mobile
     group.position.set(1.4, 0, 0);
     scene.add(group);
 
-    // Primary Core: Sculptured Quantum Torus Knot
-    const knotGeo = new THREE.TorusKnotGeometry(1.15, 0.35, 140, 32, 2, 3);
+    // Primary Core: Torus Knot
+    const knotGeo = new THREE.TorusKnotGeometry(1.15, 0.35, 100, 24, 2, 3);
     const knotMat = new THREE.MeshPhysicalMaterial({
       color: new THREE.Color("#c5a880"),
       metalness: 0.92,
@@ -70,7 +66,7 @@ export function Hero3DCanvas() {
     group.add(knotMesh);
 
     // Outer Harmonic Wireframe Cage
-    const wireGeo = new THREE.TorusKnotGeometry(1.18, 0.36, 70, 16, 2, 3);
+    const wireGeo = new THREE.TorusKnotGeometry(1.18, 0.36, 60, 16, 2, 3);
     const wireMat = new THREE.MeshBasicMaterial({
       color: new THREE.Color("#f4f1eb"),
       wireframe: true,
@@ -81,7 +77,7 @@ export function Hero3DCanvas() {
     group.add(wireMesh);
 
     // Orbital Halo Ring
-    const haloGeo = new THREE.TorusGeometry(2.1, 0.008, 8, 80);
+    const haloGeo = new THREE.TorusGeometry(2.1, 0.008, 8, 64);
     const haloMat = new THREE.MeshBasicMaterial({
       color: new THREE.Color("#c5a880"),
       transparent: true,
@@ -91,8 +87,8 @@ export function Hero3DCanvas() {
     haloMesh.rotation.set(Math.PI / 2.3, 0.35, 0);
     group.add(haloMesh);
 
-    // 5. Subtle Floating Golden Star Dust
-    const dustCount = 45;
+    // 5. Floating Star Dust
+    const dustCount = 35;
     const dustPositions = new Float32Array(dustCount * 3);
     for (let i = 0; i < dustCount; i++) {
       dustPositions[i * 3] = (Math.random() - 0.5) * 8;
@@ -141,10 +137,15 @@ export function Hero3DCanvas() {
     resizeObserver.observe(container);
     handleResize();
 
-    // 8. Animation Loop
-    let animationFrameId: number;
+    // 8. Performance Guard: Pause WebGL Loop when Hero is Off-Screen (ibelick/baseline-ui)
+    let animationFrameId = 0;
+    let isVisible = true;
 
     const animate = (timestamp: number) => {
+      if (!isVisible) {
+        animationFrameId = 0;
+        return;
+      }
       animationFrameId = requestAnimationFrame(animate);
 
       timer.update(timestamp);
@@ -169,13 +170,27 @@ export function Hero3DCanvas() {
       renderer.render(scene, camera);
     };
 
+    // Observer pauses render loop completely when scrolled away
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !animationFrameId) {
+          timer.reset();
+          animationFrameId = requestAnimationFrame(animate);
+        }
+      },
+      { rootMargin: "100px 0px" }
+    );
+    intersectionObserver.observe(container);
+
     animationFrameId = requestAnimationFrame(animate);
 
     // 9. Resource Cleanup
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
       window.removeEventListener("mousemove", onMouseMove);
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
 
       knotGeo.dispose();
       knotMat.dispose();

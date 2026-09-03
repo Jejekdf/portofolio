@@ -16,9 +16,9 @@ const CERTIFICATES: Certificate[] = [
     image: "/certificates/bnsp-network-administrator.webp",
     skills: ["Network Administration", "Routing & Switching", "Network Security", "VLAN & Subnetting", "Troubleshooting"],
     competencies: [
-      "Konfigurasi dan instalasi perangkat routing serta switching seperti VLAN, Subnetting, OSPF, dan BGP.",
-      "Manajemen keamanan perimeter jaringan meliputi Firewall, Access Control List, dan NAT.",
-      "Analisis trafik data, troubleshooting konektivitas, serta pengalamatan IPv4 dan IPv6.",
+      "Configuration and deployment of enterprise routing and switching infrastructures including VLAN, Subnetting, OSPF, and BGP.",
+      "Perimeter network defense engineering covering Firewalls, Access Control Lists (ACL), and NAT policies.",
+      "Data traffic diagnostics, latency troubleshooting, and IPv4/IPv6 dual-stack addressing standards.",
     ],
   },
   {
@@ -30,9 +30,9 @@ const CERTIFICATES: Certificate[] = [
     image: "/certificates/huawei-hcia-cloud.webp",
     skills: ["Cloud Infrastructure", "Virtual Private Cloud", "Compute & Storage", "Cloud Security", "Disaster Recovery"],
     competencies: [
-      "Arsitektur komputasi awan dan teknologi virtualisasi perangkat keras compute, storage, dan network.",
-      "Pengelolaan infrastruktur cloud enterprise seperti Elastic Cloud Server, EVS, dan Virtual Private Cloud.",
-      "Manajemen operasi cloud, strategi backup data, disaster recovery, dan tata kelola keamanan cloud.",
+      "Enterprise cloud compute, distributed storage, and software-defined networking virtualization.",
+      "Deployment and administration of cloud services including Elastic Cloud Server (ECS), EVS, and Virtual Private Cloud (VPC).",
+      "Cloud operations and maintenance (O&M), automated backup strategies, disaster recovery, and security governance.",
     ],
   },
   {
@@ -44,9 +44,9 @@ const CERTIFICATES: Certificate[] = [
     image: "/certificates/ibm-granite-ai.webp",
     skills: ["IBM Granite LLM", "AI Code Generation", "Prompt Engineering", "Code Refactoring", "Enterprise AI"],
     competencies: [
-      "Implementasi model fondasi AI IBM Granite untuk otomatisasi rekayasa software dan sintesis kode sumber.",
-      "Prompt Engineering tingkat lanjut untuk pembuatan arsitektur modul, refactoring, dan optimasi logika.",
-      "Evaluasi kualitas, benchmarking performa, dan validasi keamanan terhadap output kode AI.",
+      "Implementation of IBM Granite foundational AI models for software engineering automation and source code synthesis.",
+      "Advanced prompt engineering for architectural module design, refactoring, and logical optimization.",
+      "Code quality benchmarking, runtime performance evaluation, and security validation of AI-generated output.",
     ],
   },
   {
@@ -58,23 +58,23 @@ const CERTIFICATES: Certificate[] = [
     image: "/certificates/hackerrank-software-engineer.webp",
     skills: ["Algorithms & Data Structures", "Problem Solving", "SQL Optimization", "Backend Logic", "Complexity Analysis"],
     competencies: [
-      "Algoritma tingkat lanjut dan analisis kompleksitas ruang dan waktu.",
-      "Struktur data esensial seperti Graphs, Trees, Hash Tables, Dynamic Programming, dan Pointer.",
-      "Optimasi query database relasional SQL, validasi logika backend, dan arsitektur kode bersih.",
+      "Advanced algorithms and algorithmic complexity analysis across Big O space and time constraints.",
+      "Implementation of core data structures including Graphs, Trees, Hash Tables, Dynamic Programming, and Pointer mechanics.",
+      "Relational database SQL query optimization, robust backend validation logic, and clean code principles.",
     ],
   },
   {
-    id: "codepolitan-fullstack",
-    title: "Fullstack Web & Software Engineering",
+    id: "codepolitan-genai",
+    title: "Fundamentals of Generative AI",
     issuer: "CodePolitan",
     issueDate: "2025",
     credentialUrl: "https://www.linkedin.com/in/randi-maulana-dev",
     image: "/certificates/codepolitan-fullstack.webp",
-    skills: ["Fullstack Architecture", "Laravel & PHP", "RESTful API Design", "Relational Database", "Next.js"],
+    skills: ["Generative AI", "Prompt Engineering", "Workflow Automation", "AI Tools"],
     competencies: [
-      "Arsitektur web end-to-end, desain antarmuka frontend, dan integrasi backend API terdistribusi.",
-      "Perancangan RESTful API, otentikasi token dan session, serta pemodelan database relasional.",
-      "Implementasi framework PHP Laravel MVC, middleware, ORM Eloquent, dan reaktivitas Next.js.",
+      "Core foundations of generative AI architectures, foundational models, and prompting methodologies.",
+      "Practical implementation of modern AI tooling for software engineering workflows and developer productivity.",
+      "Accredited under the AI Opportunity Fund Asia Pacific supported by Google.org and Asian Development Bank.",
     ],
   },
   {
@@ -86,9 +86,9 @@ const CERTIFICATES: Certificate[] = [
     image: "/certificates/cisco-javascript-essentials.webp",
     skills: ["JavaScript ES6+", "OOP", "Async & Promises", "DOM Manipulation", "Event Loop"],
     competencies: [
-      "Fundamental inti JavaScript ES6+ seperti primitive types, scope, closures, dan execution context.",
-      "Pemrograman Berorientasi Objek OOP, prototipe, manipulasi DOM, dan event handling interaktif.",
-      "Penanganan operasi asinkron Async Await, Promises, dan mekanika antrean microtask Event Loop.",
+      "Core JavaScript ES6+ foundations including primitive types, closures, variable scoping, and execution contexts.",
+      "Object-Oriented Programming (OOP), prototypes, DOM tree manipulation, and interactive browser event handling.",
+      "Asynchronous operations management using Async/Await, Promises, and the JavaScript microtask Event Loop.",
     ],
   },
   {
@@ -100,9 +100,9 @@ const CERTIFICATES: Certificate[] = [
     image: "/certificates/cisco-cybersecurity-intro.webp",
     skills: ["Cyber Threat Analysis", "CIA Triad", "Network Defense", "Data Protection", "Security Mitigation"],
     competencies: [
-      "Analisis vektor ancaman keamanan siber seperti Malware, Phishing, Social Engineering, dan DDoS.",
-      "Penerapan pilar keamanan CIA Triad Confidentiality, Integrity, Availability dalam arsitektur data.",
-      "Prinsip perlindungan data, dasar kriptografi, dan mitigasi kerentanan pada sistem jaringan dan web.",
+      "Cybersecurity threat vector analysis including Malware, Phishing, Social Engineering, and DDoS mitigation.",
+      "Application of the core CIA Triad (Confidentiality, Integrity, Availability) across data systems.",
+      "Data protection fundamentals, cryptography standards, and vulnerability mitigation in web and network systems.",
     ],
   },
   {
@@ -114,23 +114,23 @@ const CERTIFICATES: Certificate[] = [
     image: "/certificates/hacktiv8-maju-bareng-ai.webp",
     skills: ["Generative AI", "AI Dev Tools", "AI API Integration", "Productivity", "Modern AI"],
     competencies: [
-      "Penerapan model AI Generatif dalam alur kerja rekayasa perangkat lunak modern.",
-      "Peningkatan produktivitas developer menggunakan ekosistem AI Developer Tools dan prompt pipelines.",
-      "Pemanfaatan API LLM untuk fitur interaktif cerdas dan otomatisasi alur kerja web modern.",
+      "Application of generative AI models within modern software development lifecycle (SDLC) workflows.",
+      "Developer productivity acceleration utilizing AI-assisted developer toolchains and prompt pipelines.",
+      "Integration of Large Language Model (LLM) APIs for intelligent web automation and dynamic application features.",
     ],
   },
   {
-    id: "komdigi-digital-talent",
-    title: "Digital Talent Scholarship",
-    issuer: "Kementerian Komdigi",
+    id: "ubsi-it-bootcamp",
+    title: "IT Bootcamp Software Development For Industry",
+    issuer: "Universitas Bina Sarana Informatika",
     issueDate: "2025",
     credentialUrl: "https://www.linkedin.com/in/randi-maulana-dev",
     image: "/certificates/komdigi-digital-talent.webp",
-    skills: ["Cloud Infrastructure", "Digital Systems", "Industry Standards", "System Integration", "Leadership"],
+    skills: ["Laravel", "PHP", "MySQL", "Web Architecture", "MVC Pattern"],
     competencies: [
-      "Pelatihan intensif kompetensi digital dan standardisasi infrastruktur teknologi industri.",
-      "Implementasi praktis rekayasa sistem cloud, jaringan terdistribusi, dan kolaborasi tim.",
-      "Tata kelola standar industri teknologi informasi, etika profesional, dan kepemimpinan teknis.",
+      "Intensive industry bootcamp covering the full software engineering lifecycle, hands-on development, and technical defense.",
+      "Designed and developed fullstack wedding reception web platform using Laravel PHP MVC, MySQL database modeling, guest reservation management, and automated invitation workflows.",
+      "Delivered 7-hour practical software project implementation and live presentation evaluated by university faculty.",
     ],
   },
 ];
@@ -275,7 +275,7 @@ export function CertificateGrid() {
       {/* Cinematic Modal Lightbox - Complete Details */}
       <AnimatePresence>
         {selectedCert && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-10 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-10 overflow-y-auto">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -293,20 +293,20 @@ export function CertificateGrid() {
               transition={{ duration: 0.25, ease: "easeOut" }}
               className="relative z-10 max-w-4xl w-full my-auto bg-[#0d120e] border border-[#1e2a20] shadow-2xl rounded-2xl overflow-hidden flex flex-col max-h-[90vh]"
             >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-[#1e2a20] bg-[#090d0a] shrink-0">
-                <div className="flex flex-col gap-0.5">
-                  <span className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold">
+              {/* Sticky Modal Header with Accessible 44px Close Button */}
+              <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#1e2a20] bg-[#090d0a]/95 backdrop-blur-md shrink-0">
+                <div className="flex flex-col gap-0.5 max-w-[calc(100%-3.5rem)] pr-2">
+                  <span className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold truncate">
                     {selectedCert.issuer}
                   </span>
-                  <h3 className="font-mono text-sm sm:text-base font-bold text-[#f4f1eb]">
+                  <h3 className="font-mono text-xs sm:text-base font-bold text-[#f4f1eb] leading-snug truncate sm:whitespace-normal">
                     {selectedCert.title}
                   </h3>
                 </div>
                 <button
                   onClick={() => setSelectedCert(null)}
                   aria-label="Close modal"
-                  className="p-1.5 text-[#9e988f] hover:text-[#f4f1eb] transition-colors duration-150 cursor-pointer"
+                  className="size-10 sm:size-11 min-w-10 min-h-10 sm:min-w-11 sm:min-h-11 flex items-center justify-center rounded-full bg-[#1e2a20]/80 border border-[#1e2a20] text-[#f4f1eb] hover:bg-[#c5a880] hover:text-[#090d0a] hover:border-[#c5a880] active:scale-95 transition-all duration-150 cursor-pointer shrink-0"
                 >
                   <X className="size-5" />
                 </button>
@@ -329,10 +329,10 @@ export function CertificateGrid() {
                 )}
 
                 {/* Comprehensive Competencies Learned */}
-                <div className="p-6 sm:p-8 flex flex-col gap-6 bg-[#0d120e]">
+                <div className="p-5 sm:p-8 flex flex-col gap-6 bg-[#0d120e]">
                   <div className="flex flex-col gap-3">
                     <h4 className="font-mono text-xs uppercase tracking-widest text-[#f4f1eb] font-bold">
-                      Kompetensi Materi Yang Dipelajari
+                      Core Learned Competencies
                     </h4>
                     {selectedCert.competencies && (
                       <div className="flex flex-col gap-2.5">
@@ -368,7 +368,7 @@ export function CertificateGrid() {
               </div>
 
               {/* Modal Footer */}
-              <div className="px-6 py-3 border-t border-[#1e2a20] bg-[#090d0a] flex items-center justify-between shrink-0">
+              <div className="px-5 sm:px-6 py-3 border-t border-[#1e2a20] bg-[#090d0a] flex items-center justify-between shrink-0">
                 <span className="font-mono text-2xs text-[#9e988f]/60">
                   Year of Issue: {selectedCert.issueDate}
                 </span>

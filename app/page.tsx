@@ -8,11 +8,8 @@ import { SkillGrid } from "@/app/components/ui/SkillGrid";
 import { ContactForm } from "@/app/components/ui/ContactForm";
 import { Footer } from "@/app/components/ui/Footer";
 import { CinematicSpotlight } from "@/app/components/ui/CinematicSpotlight";
-import { useScrollSpy } from "@/app/hooks/useScrollSpy";
 
 export default function Home() {
-  useScrollSpy();
-
   return (
     <>
       {/* Ambient Cursor Spotlight across the deep obsidian canvas */}

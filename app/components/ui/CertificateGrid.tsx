@@ -291,7 +291,7 @@ export function CertificateGrid() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 16 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative z-10 max-w-4xl w-full my-auto bg-[#0d120e] border border-[#1e2a20] shadow-2xl rounded-2xl overflow-hidden flex flex-col max-h-[90vh]"
+              className="relative z-10 max-w-4xl w-full my-auto bg-[#0d120e] border border-[#1e2a20] shadow-2xl rounded-2xl overflow-hidden flex flex-col max-h-[90dvh]"
             >
               {/* Sticky Modal Header with Accessible 44px Close Button */}
               <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#1e2a20] bg-[#090d0a]/95 backdrop-blur-md shrink-0">

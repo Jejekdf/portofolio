@@ -43,10 +43,10 @@ export function Header() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#090d0a]/80 backdrop-blur-md border-b border-[#1e2a20]/60 pt-[env(safe-area-inset-top)] transition-all">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 h-14 sm:h-16 flex items-center justify-between">
-          {/* Monogram Brand Mark */}
+          {/* Monogram Brand Mark (44px tap target) */}
           <button
             onClick={() => scrollTo("hero")}
-            className="group flex items-center gap-2 cursor-pointer"
+            className="group min-h-11 min-w-11 flex items-center justify-center cursor-pointer"
             aria-label="Scroll to top"
           >
             <span className="font-mono text-xs font-bold tracking-widest text-[#090d0a] bg-[#c5a880] px-2.5 py-1 group-hover:bg-[#f4f1eb] transition-colors duration-150">
@@ -54,7 +54,7 @@ export function Header() {
             </span>
           </button>
 
-          {/* Minimalist Desktop Nav (No bullets/dots) */}
+          {/* Minimalist Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1 sm:gap-2">
             {NAV_ITEMS.map(({ label, id }) => {
               const isActive = activeSection === id;
@@ -74,7 +74,7 @@ export function Header() {
             })}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button (44px tap target) */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 min-w-11 min-h-11 flex items-center justify-center text-[#9e988f] hover:text-[#f4f1eb] transition-colors cursor-pointer"
@@ -85,7 +85,7 @@ export function Header() {
           </button>
         </div>
 
-        {/* Mobile Navigation Drawer (No bullets/dots) */}
+        {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#090d0a]/95 backdrop-blur-xl border-b border-[#1e2a20] px-5 py-6">
             <nav className="flex flex-col gap-4">

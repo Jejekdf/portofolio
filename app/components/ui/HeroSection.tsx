@@ -65,7 +65,7 @@ export function HeroSection() {
         animate="show"
         className="relative z-10 flex flex-col gap-10 sm:gap-14"
       >
-        {/* Top Status & Avatar Meta (No bullets/dots, perfectly matched title) */}
+        {/* Top Status & Avatar Meta (Standard 44px mobile tap targets) */}
         <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <img
@@ -84,13 +84,13 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Direct Social Links */}
+          {/* Direct Social Links (44px touch target) */}
           <div className="flex items-center gap-2 sm:gap-3">
             <a
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-10 sm:min-h-0 text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
             >
               <GithubIcon className="size-3.5" />
               <span>GitHub</span>
@@ -99,14 +99,14 @@ export function HeroSection() {
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-10 sm:min-h-0 text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
             >
               <LinkedinIcon className="size-3.5" />
               <span>LinkedIn</span>
             </a>
             <a
               href={`mailto:${email}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-10 sm:min-h-0 text-[#9e988f] hover:text-[#c5a880] font-mono text-xs tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#c5a880] font-mono text-xs tracking-wider transition-colors duration-150"
             >
               <Mail className="size-3.5" />
               <span>Email</span>

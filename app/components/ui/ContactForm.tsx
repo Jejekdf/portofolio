@@ -139,7 +139,7 @@ export function ContactForm() {
                   href={href}
                   target={href.startsWith("mailto") ? undefined : "_blank"}
                   rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                  className="group p-3.5 rounded-xl bg-[#090d0a]/60 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-200 flex items-center justify-between"
+                  className="group p-3.5 min-h-11 rounded-xl bg-[#090d0a]/60 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-200 flex items-center justify-between"
                 >
                   <div className="flex items-center gap-3">
                     <div className="size-8 rounded-lg bg-[#1e2a20]/60 border border-[#1e2a20] flex items-center justify-center text-[#c5a880] group-hover:scale-105 transition-transform">
@@ -185,7 +185,7 @@ export function ContactForm() {
                 onBlur={() => handleBlur("name")}
                 placeholder="Your full name"
                 required
-                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
+                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-base sm:text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
                   fieldErrors.name
                     ? "border-red-500/80 focus:border-red-500"
                     : touched.name && formData.name.length >= 2
@@ -217,7 +217,7 @@ export function ContactForm() {
                 onBlur={() => handleBlur("email")}
                 placeholder="name@company.com"
                 required
-                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
+                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-base sm:text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
                   fieldErrors.email
                     ? "border-red-500/80 focus:border-red-500"
                     : touched.email && formData.email.includes("@")
@@ -249,7 +249,7 @@ export function ContactForm() {
                 onBlur={() => handleBlur("message")}
                 placeholder="Project details, timeline, or engineering role"
                 required
-                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none resize-none transition-colors duration-150 ${
+                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-base sm:text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none resize-none transition-colors duration-150 ${
                   fieldErrors.message
                     ? "border-red-500/80 focus:border-red-500"
                     : touched.message && formData.message.split(/\s+/).filter(Boolean).length >= 3
@@ -272,7 +272,7 @@ export function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest rounded-lg hover:bg-[#f4f1eb] transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer self-start shadow-md"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 min-h-11 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest rounded-lg hover:bg-[#f4f1eb] transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer self-start shadow-md"
               >
                 {status === "loading" ? (
                   <>

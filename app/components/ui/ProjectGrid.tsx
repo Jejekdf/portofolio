@@ -77,7 +77,7 @@ export function ProjectGrid() {
   return (
     <motion.section
       id="projects"
-      className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24"
+      className="w-full px-5 sm:px-8 md:px-12 lg:px-16 2xl:px-24 py-16 sm:py-24"
       aria-label="Projects"
       variants={sectionVariant}
       initial="hidden"
@@ -87,14 +87,17 @@ export function ProjectGrid() {
       {/* Editorial Scene Header */}
       <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-10">
         <div>
-          <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
+          <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
+            Portfolio
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-1 text-balance">
             Featured Systems
           </h2>
-          <p className="font-mono text-2xs text-[#9e988f] mt-1">
+          <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
             Production web platforms, API gateways, and mobile IoT systems
           </p>
         </div>
-        <span className="font-mono text-2xs text-[#c5a880] tracking-widest uppercase">
+        <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase">
           {PROJECTS.length} Systems
         </span>
       </div>
@@ -108,7 +111,7 @@ export function ProjectGrid() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-30px" }}
-          className="group relative p-6 sm:p-8 md:p-10 rounded-2xl bg-[#0d120e]/80 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-300 backdrop-blur-md overflow-hidden"
+          className="group relative p-6 sm:p-8 md:p-10 lg:p-12 rounded-2xl bg-[#0d120e]/80 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-300 backdrop-blur-md overflow-hidden"
         >
           {/* Ambient Radial Highlight */}
           <div
@@ -125,7 +128,7 @@ export function ProjectGrid() {
             </div>
 
             {/* Title & Description */}
-            <div className="flex flex-col gap-3 max-w-3xl">
+            <div className="flex flex-col gap-3 max-w-4xl 2xl:max-w-5xl">
               <h3 className="font-mono text-2xl sm:text-3xl font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-200 uppercase tracking-wide">
                 {featuredProject.title}
               </h3>
@@ -140,7 +143,7 @@ export function ProjectGrid() {
                 {featuredProject.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center px-3 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/40 font-mono text-2xs text-[#9e988f] group-hover:border-[#c5a880]/30 group-hover:text-[#f4f1eb] transition-colors duration-150"
+                    className="inline-flex items-center px-3 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/40 font-mono text-xs text-[#9e988f] group-hover:border-[#c5a880]/30 group-hover:text-[#f4f1eb] transition-colors duration-150"
                   >
                     {tag}
                   </span>
@@ -173,8 +176,8 @@ export function ProjectGrid() {
           </div>
         </motion.article>
 
-        {/* 2. Side-by-Side 2-Column Bento Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* 2. Side-by-Side 4-Column Bento Cards on Desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {sideProjects.map((project, idx) => (
             <motion.article
               key={project.id}
@@ -187,7 +190,7 @@ export function ProjectGrid() {
             >
               <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-2xs text-[#c5a880] font-medium uppercase tracking-wider">
+                  <span className="font-mono text-xs text-[#c5a880] font-medium uppercase tracking-wider">
                     {project.scope}
                   </span>
                   <a
@@ -217,7 +220,7 @@ export function ProjectGrid() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full border border-[#1e2a20] bg-[#1e2a20]/40 font-mono text-2xs text-[#9e988f] group-hover:border-[#c5a880]/30 group-hover:text-[#f4f1eb] transition-colors duration-150"
+                      className="inline-flex items-center px-3 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/40 font-mono text-xs text-[#9e988f] group-hover:border-[#c5a880]/30 group-hover:text-[#f4f1eb] transition-colors duration-150"
                     >
                       {tag}
                     </span>
@@ -229,7 +232,7 @@ export function ProjectGrid() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-mono text-2xs uppercase tracking-wider text-[#c5a880] hover:text-[#f4f1eb] transition-colors duration-150"
+                    className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[#c5a880] hover:text-[#f4f1eb] transition-colors duration-150"
                   >
                     <span>View GitHub</span>
                     <ArrowUpRight className="size-3" />

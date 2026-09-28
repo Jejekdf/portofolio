@@ -57,7 +57,7 @@ export function SkillGrid() {
   return (
     <motion.section
       id="skills"
-      className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24"
+      className="w-full px-5 sm:px-8 md:px-12 lg:px-16 2xl:px-24 py-16 sm:py-24"
       aria-label="Skills"
       variants={sectionVariant}
       initial="hidden"
@@ -67,20 +67,23 @@ export function SkillGrid() {
       {/* Editorial Scene Header */}
       <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-10">
         <div>
-          <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
+          <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
+            Technical Stack
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-1 text-balance">
             Capabilities Matrix
           </h2>
-          <p className="font-mono text-2xs text-[#9e988f] mt-1">
+          <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
             Core engineering domains and technologies
           </p>
         </div>
-        <span className="font-mono text-2xs text-[#c5a880] tracking-widest uppercase">
+        <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase">
           4 Domains
         </span>
       </div>
 
-      {/* 4-Quadrant Architecture Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* 4-Quadrant Architecture Cards Grid (Expands to 4-cols on laptop & desktop) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {SKILL_CATEGORIES.map(({ category, scope, icon: Icon, items }, i) => (
           <motion.div
             key={category}
@@ -89,7 +92,7 @@ export function SkillGrid() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-30px" }}
-            className="group relative p-6 sm:p-8 rounded-2xl bg-[#0d120e]/80 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-300 backdrop-blur-md flex flex-col justify-between gap-6"
+            className="group relative p-6 sm:p-7 rounded-2xl bg-[#0d120e]/80 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-300 backdrop-blur-md flex flex-col justify-between gap-6"
           >
             {/* Top Category Info */}
             <div className="flex flex-col gap-3">
@@ -97,7 +100,7 @@ export function SkillGrid() {
                 <div className="size-10 rounded-xl bg-[#1e2a20]/60 border border-[#1e2a20] flex items-center justify-center text-[#c5a880] group-hover:scale-110 group-hover:border-[#c5a880]/40 transition-all duration-300">
                   <Icon className="size-5" />
                 </div>
-                <span className="font-mono text-2xs text-[#9e988f]/50 uppercase tracking-wider">
+                <span className="font-mono text-xs text-[#9e988f]/50 uppercase tracking-wider">
                   0{i + 1}
                 </span>
               </div>
@@ -106,7 +109,7 @@ export function SkillGrid() {
                 <h3 className="font-mono text-base sm:text-lg font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-150 uppercase tracking-wide">
                   {category}
                 </h3>
-                <p className="font-mono text-2xs text-[#9e988f] leading-relaxed">
+                <p className="font-mono text-xs text-[#9e988f] leading-relaxed">
                   {scope}
                 </p>
               </div>
@@ -117,7 +120,7 @@ export function SkillGrid() {
               {items.map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center px-3 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/30 font-mono text-2xs text-[#f4f1eb] group-hover:border-[#c5a880]/30 transition-colors duration-150"
+                  className="inline-flex items-center px-3 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/30 font-mono text-xs text-[#f4f1eb] group-hover:border-[#c5a880]/30 transition-colors duration-150"
                 >
                   {item}
                 </span>

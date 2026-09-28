@@ -52,7 +52,7 @@ export function Header() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#090d0a]/80 backdrop-blur-md border-b border-[#1e2a20]/60 pt-[env(safe-area-inset-top)] transition-all">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 h-14 sm:h-16 flex items-center justify-between">
+        <div className="w-full px-5 sm:px-8 md:px-12 lg:px-16 2xl:px-24 h-14 sm:h-16 flex items-center justify-between">
           {/* Architectural Geometric Monogram Brand Mark (44px tap target) */}
           <button
             onClick={() => scrollTo("hero")}

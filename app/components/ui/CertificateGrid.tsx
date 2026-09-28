@@ -171,7 +171,7 @@ export function CertificateGrid() {
   return (
     <motion.section
       id="certificates"
-      className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24"
+      className="w-full px-5 sm:px-8 md:px-12 lg:px-16 2xl:px-24 py-16 sm:py-24"
       aria-label="Certificates"
       variants={sectionVariant}
       initial="hidden"
@@ -181,20 +181,23 @@ export function CertificateGrid() {
       {/* Editorial Scene Header */}
       <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-10">
         <div>
-          <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
-            Verified Credentials
+          <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
+            Credentials
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-1 text-balance">
+            Verified Certifications
           </h2>
-          <p className="font-mono text-2xs text-[#9e988f] mt-1">
+          <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
             Industry accreditations and validated technical competencies
           </p>
         </div>
-        <span className="font-mono text-2xs text-[#c5a880] tracking-widest uppercase">
+        <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase">
           {CERTIFICATES.length} Verified
         </span>
       </div>
 
-      {/* 3-Column Visual Certificate Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+      {/* Visual Certificate Cards Grid (Adapts from 1 to 4 columns) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 items-stretch">
         {CERTIFICATES.map((cert, i) => (
           <motion.div
             key={cert.id}
@@ -220,7 +223,7 @@ export function CertificateGrid() {
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d120e] via-transparent to-transparent opacity-60 pointer-events-none" />
-                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-[#090d0a]/90 border border-[#1e2a20] text-[#c5a880] font-mono text-2xs uppercase tracking-wider inline-flex items-center gap-1">
+                <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-[#090d0a]/90 border border-[#1e2a20] text-[#c5a880] font-mono text-xs uppercase tracking-wider inline-flex items-center gap-1">
                   <Eye className="size-3" />
                   <span>View Details</span>
                 </div>
@@ -231,10 +234,10 @@ export function CertificateGrid() {
             <div className="p-5 flex flex-col flex-1 justify-between gap-4">
               <div className="flex flex-col gap-1.5">
                 <div className="h-8 flex items-start justify-between gap-2">
-                  <span className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold leading-tight">
+                  <span className="font-mono text-xs uppercase tracking-widest text-[#c5a880] font-bold leading-tight">
                     {cert.issuer}
                   </span>
-                  <span className="font-mono text-2xs text-[#9e988f]/60 shrink-0">
+                  <span className="font-mono text-xs text-[#9e988f]/60 shrink-0">
                     {cert.issueDate}
                   </span>
                 </div>
@@ -242,7 +245,7 @@ export function CertificateGrid() {
                 <div className="h-10 flex items-center">
                   <h3
                     onClick={() => setSelectedCert(cert)}
-                    className="font-mono text-sm font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-150 cursor-pointer leading-snug line-clamp-2"
+                    className="font-mono text-sm sm:text-base font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-150 cursor-pointer leading-snug line-clamp-2"
                   >
                     {cert.title}
                   </h3>
@@ -251,17 +254,17 @@ export function CertificateGrid() {
 
               {/* Lower Block: Border and Skills Chips */}
               <div className="pt-3 border-t border-[#1e2a20]/60 mt-auto">
-                <div className="flex flex-wrap gap-1.5 h-6 overflow-hidden items-center">
+                <div className="flex flex-wrap gap-1.5 h-7 overflow-hidden items-center">
                   {cert.skills.slice(0, 2).map((skill) => (
                     <span
                       key={skill}
-                      className="inline-flex items-center px-2 py-0.5 rounded border border-[#1e2a20] bg-[#1e2a20]/30 font-mono text-2xs text-[#9e988f] whitespace-nowrap"
+                      className="inline-flex items-center px-2.5 py-0.5 rounded border border-[#1e2a20] bg-[#1e2a20]/30 font-mono text-xs text-[#9e988f] whitespace-nowrap"
                     >
                       {skill}
                     </span>
                   ))}
                   {cert.skills.length > 2 && (
-                    <span className="font-mono text-2xs text-[#9e988f]/50 whitespace-nowrap">
+                    <span className="font-mono text-xs text-[#9e988f]/50 whitespace-nowrap">
                       +{cert.skills.length - 2} more
                     </span>
                   )}
@@ -296,7 +299,7 @@ export function CertificateGrid() {
               {/* Sticky Modal Header with Accessible 44px Close Button */}
               <div className="sticky top-0 z-30 flex items-start sm:items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-[#1e2a20] bg-[#090d0a] shrink-0 gap-3">
                 <div className="flex flex-col gap-0.5 flex-1 min-w-0 pr-1">
-                  <span className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold leading-tight">
+                  <span className="font-mono text-xs uppercase tracking-widest text-[#c5a880] font-bold leading-tight">
                     {selectedCert.issuer}
                   </span>
                   <h3 className="font-mono text-xs sm:text-base font-bold text-[#f4f1eb] leading-snug">
@@ -350,14 +353,14 @@ export function CertificateGrid() {
 
                   {/* Skills Pills Matrix */}
                   <div className="flex flex-col gap-2.5 pt-4 border-t border-[#1e2a20]">
-                    <span className="font-mono text-2xs uppercase tracking-widest text-[#9e988f]">
+                    <span className="font-mono text-xs uppercase tracking-widest text-[#9e988f]">
                       Validated Domains
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {selectedCert.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-2.5 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/40 font-mono text-2xs text-[#f4f1eb]"
+                          className="px-2.5 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/40 font-mono text-xs text-[#f4f1eb]"
                         >
                           {skill}
                         </span>
@@ -369,10 +372,10 @@ export function CertificateGrid() {
 
               {/* Modal Footer with ESC text hidden on mobile */}
               <div className="px-5 sm:px-6 py-3 border-t border-[#1e2a20] bg-[#090d0a] flex items-center justify-between shrink-0">
-                <span className="font-mono text-2xs text-[#9e988f]/60">
+                <span className="font-mono text-xs text-[#9e988f]/60">
                   Year of Issue: {selectedCert.issueDate}
                 </span>
-                <span className="font-mono text-2xs text-[#9e988f]/40 hidden sm:inline-block">
+                <span className="font-mono text-xs text-[#9e988f]/40 hidden sm:inline-block">
                   Press ESC to dismiss
                 </span>
               </div>

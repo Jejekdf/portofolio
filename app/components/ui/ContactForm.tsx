@@ -81,7 +81,7 @@ export function ContactForm() {
   return (
     <motion.section
       id="contact"
-      className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24"
+      className="w-full px-5 sm:px-8 md:px-12 lg:px-16 2xl:px-24 py-16 sm:py-24"
       aria-label="Contact"
       variants={sectionVariant}
       initial="hidden"
@@ -91,21 +91,24 @@ export function ContactForm() {
       {/* Editorial Section Header */}
       <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-10">
         <div>
-          <h2 className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-[#f4f1eb]">
+          <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
+            Communication
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-1 text-balance">
             Get In Touch
           </h2>
-          <p className="font-mono text-2xs text-[#9e988f] mt-1">
+          <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
             Available for fullstack engineering roles and consulting
           </p>
         </div>
-        <span className="font-mono text-2xs text-[#c5a880] tracking-widest uppercase">
+        <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase">
           Open to Work
         </span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         {/* Left Column: Direct Communication Cards */}
-        <div className="lg:col-span-5 flex flex-col gap-4">
+        <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-4">
           <div className="p-6 sm:p-8 rounded-2xl bg-[#0d120e]/80 border border-[#1e2a20] backdrop-blur-md flex flex-col gap-4">
             <h3 className="font-mono text-lg font-bold text-[#f4f1eb] uppercase tracking-wide">
               Direct Channels
@@ -128,7 +131,7 @@ export function ContactForm() {
                       {icon}
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-mono text-2xs uppercase tracking-wider text-[#9e988f]/70">
+                      <span className="font-mono text-xs uppercase tracking-wider text-[#9e988f]/70">
                         {title}
                       </span>
                       <span className="font-mono text-xs text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors">
@@ -144,7 +147,7 @@ export function ContactForm() {
         </div>
 
         {/* Right Column: Best-Practice Structured Form */}
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-7 xl:col-span-8">
           <form
             onSubmit={handleSubmit}
             noValidate
@@ -153,10 +156,10 @@ export function ContactForm() {
             {/* Name Field */}
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label htmlFor="name" className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold">
+                <label htmlFor="name" className="font-mono text-xs uppercase tracking-widest text-[#c5a880] font-bold">
                   Name
                 </label>
-                <span className="font-mono text-2xs text-[#9e988f]/40">Required</span>
+                <span className="font-mono text-xs text-[#9e988f]/50">Required</span>
               </div>
               <input
                 id="name"
@@ -176,7 +179,7 @@ export function ContactForm() {
                 }`}
               />
               {fieldErrors.name && (
-                <span className="font-mono text-2xs text-red-400">
+                <span className="font-mono text-xs text-red-400">
                   {fieldErrors.name}
                 </span>
               )}
@@ -185,10 +188,10 @@ export function ContactForm() {
             {/* Email Field */}
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label htmlFor="email" className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold">
+                <label htmlFor="email" className="font-mono text-xs uppercase tracking-widest text-[#c5a880] font-bold">
                   Email
                 </label>
-                <span className="font-mono text-2xs text-[#9e988f]/40">Required</span>
+                <span className="font-mono text-xs text-[#9e988f]/50">Required</span>
               </div>
               <input
                 id="email"
@@ -208,7 +211,7 @@ export function ContactForm() {
                 }`}
               />
               {fieldErrors.email && (
-                <span className="font-mono text-2xs text-red-400">
+                <span className="font-mono text-xs text-red-400">
                   {fieldErrors.email}
                 </span>
               )}
@@ -217,10 +220,10 @@ export function ContactForm() {
             {/* Message Field */}
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <label htmlFor="message" className="font-mono text-2xs uppercase tracking-widest text-[#c5a880] font-bold">
+                <label htmlFor="message" className="font-mono text-xs uppercase tracking-widest text-[#c5a880] font-bold">
                   Message
                 </label>
-                <span className="font-mono text-2xs text-[#9e988f]/40">Min 3 words</span>
+                <span className="font-mono text-xs text-[#9e988f]/50">Min 3 words</span>
               </div>
               <textarea
                 id="message"
@@ -240,7 +243,7 @@ export function ContactForm() {
                 }`}
               />
               {fieldErrors.message && (
-                <span className="font-mono text-2xs text-red-400">
+                <span className="font-mono text-xs text-red-400">
                   {fieldErrors.message}
                 </span>
               )}

@@ -35,7 +35,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden"
+      className="relative w-full px-5 sm:px-8 md:px-12 lg:px-16 2xl:px-24 pt-28 sm:pt-36 pb-16 sm:pb-28 overflow-hidden"
       aria-label="About"
     >
       {/* Interactive 3D Quantum Sculpture Focal Point */}
@@ -49,18 +49,18 @@ export function HeroSection() {
       >
         {/* Top Status & Avatar Meta (Standard 44px mobile tap targets) */}
         <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3.5">
             <img
               src="/profile.webp"
               alt="Randi Maulana"
-              className="size-10 sm:size-11 object-cover rounded-full border border-[#1e2a20]"
+              className="size-11 sm:size-12 lg:size-14 object-cover rounded-full border border-[#1e2a20]"
               loading="eager"
             />
             <div className="flex flex-col gap-0.5">
-              <span className="font-mono text-xs text-[#f4f1eb] font-semibold tracking-wide">
+              <span className="font-mono text-xs sm:text-sm text-[#f4f1eb] font-semibold tracking-wide">
                 Randi Maulana
               </span>
-              <span className="font-mono text-2xs text-[#c5a880] tracking-wider uppercase">
+              <span className="font-mono text-xs text-[#c5a880] tracking-wider uppercase font-medium">
                 Available for Work
               </span>
             </div>
@@ -72,43 +72,43 @@ export function HeroSection() {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs sm:text-sm tracking-wider transition-colors duration-150"
             >
-              <GithubIcon className="size-3.5" />
+              <GithubIcon className="size-4" />
               <span>GitHub</span>
             </a>
             <a
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs sm:text-sm tracking-wider transition-colors duration-150"
             >
-              <LinkedinIcon className="size-3.5" />
+              <LinkedinIcon className="size-4" />
               <span>LinkedIn</span>
             </a>
             <a
               href={`mailto:${email}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#c5a880] font-mono text-xs tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#c5a880] font-mono text-xs sm:text-sm tracking-wider transition-colors duration-150"
             >
-              <Mail className="size-3.5" />
+              <Mail className="size-4" />
               <span>Email</span>
             </a>
           </div>
         </motion.div>
 
         {/* Singular Focal Signature Headline */}
-        <div className="flex flex-col gap-6 max-w-4xl">
+        <div className="flex flex-col gap-6 max-w-5xl 2xl:max-w-6xl">
           <motion.h1
             variants={nameVariant}
             className="font-bold uppercase tracking-tight leading-[0.88] text-[#f4f1eb] text-balance"
-            style={{ fontSize: "clamp(3rem, 10.5vw, 8.5rem)" }}
+            style={{ fontSize: "clamp(3.5rem, 10.5vw, 9.5rem)" }}
           >
             Randi<br />Maulana
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="text-base sm:text-lg lg:text-xl text-[#9e988f] max-w-2xl leading-relaxed text-pretty font-light"
+            className="text-base sm:text-lg lg:text-xl text-[#9e988f] max-w-3xl lg:max-w-4xl leading-relaxed text-pretty font-light"
           >
             Fullstack software engineer specialized in high-performance web systems, resilient backend APIs, and scalable database architectures using Next.js 16, React 19, TypeScript, PHP, Laravel, and PostgreSQL.
           </motion.p>

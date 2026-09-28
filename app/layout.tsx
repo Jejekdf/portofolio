@@ -5,6 +5,15 @@ export const metadata: Metadata = {
   title: "Randi Maulana — Fullstack Software Engineer",
   description:
     "Portfolio of Randi Maulana. Fullstack Software Engineer building scalable web applications, APIs, and database architectures with Next.js 16, React 19, TypeScript, PHP, Laravel, and PostgreSQL.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

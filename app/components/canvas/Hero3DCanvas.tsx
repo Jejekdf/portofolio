@@ -165,6 +165,10 @@ export function Hero3DCanvas() {
         wireMesh.rotation.x = -elapsed * 0.09;
         wireMesh.rotation.y = elapsed * 0.15;
         haloMesh.rotation.z = elapsed * 0.06;
+
+        // Cinematic atmospheric pulse & orbital star dust drift
+        rimLight.intensity = 4.2 + Math.sin(elapsed * 1.2) * 0.8;
+        dustPoints.rotation.y = elapsed * 0.025;
       }
 
       renderer.render(scene, camera);
@@ -211,7 +215,7 @@ export function Hero3DCanvas() {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
+      className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]"
       aria-hidden="true"
     />
   );

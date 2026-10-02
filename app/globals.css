@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
-@theme {
-  --text-2xs: 0.625rem;
-  --text-2xs--line-height: 0.875rem;
-  --text-xs-sub: 0.6875rem;
-  --text-xs-sub--line-height: 1rem;
-}
+
 
 @layer base {
   body {
@@ -24,7 +19,28 @@
   }
 }
 
-/* Cinematic Film Grain Overlay (GPU accelerated, ultra-lightweight SVG Noise) */
+/* Cinematic 35mm Film Grain Overlay (Subtle organic celluloid micro-jitter) */
+@keyframes cinematic-grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-0.5%, 0.5%); }
+  50% { transform: translate(0.5%, -0.5%); }
+  75% { transform: translate(-0.5%, -0.5%); }
+}
+
 .cinematic-film-grain {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+  width: 110%;
+  height: 110%;
+  top: -5%;
+  left: -5%;
+  animation: cinematic-grain-shift 1s steps(4) infinite;
+  will-change: transform;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-film-grain {
+    animation: none;
+    transform: none;
+  }
+}
+

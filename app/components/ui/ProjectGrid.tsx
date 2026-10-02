@@ -13,7 +13,7 @@ const PROJECTS: (Project & { scope: string; featured?: boolean })[] = [
       "Enterprise multi-tenant booking engine handling atomic slot reservations, live schedule visualization, Stripe checkout, and Upstash Redis rate limiting. Prevents double-booking with PostgreSQL database transactions.",
     tags: ["Next.js 16", "React 19", "TypeScript", "Prisma ORM", "PostgreSQL", "Supabase", "Stripe", "Upstash Redis", "Tailwind CSS"],
     github: "https://github.com/Jejekdf/Courtgrid",
-    demo: "https://courtgrid-one.vercel.app",
+    demo: "http://rnm.biz.id",
     featured: true,
   },
   {

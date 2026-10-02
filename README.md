@@ -1,29 +1,45 @@
 # Randi Maulana — Portfolio
-> High-performance engineering portfolio built with Next.js 16, Three.js WebGL, and verified GitHub repositories.
 
-A modern, performance-focused personal portfolio and software engineering showcase. Engineered for fast initial load times, high-contrast typography, and strict input validation, combining an interactive 3D WebGL hero focal sculpture with verified projects, industry credential curricula, and a 3-tier validated communication console.
+Personal software engineering portfolio showcasing fullstack web applications, system architectures, and interactive 3D WebGL experiences.
 
-## Installing / Getting started
+**Live Demo:** [http://rnm.biz.id](http://rnm.biz.id)
 
-A quick guide to set up the project locally for development.
+---
 
-```shell
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router), React 19, TypeScript
+- **Styling:** Tailwind CSS v4
+- **3D Graphics & Animation:** Three.js, Framer Motion
+- **Form & Email:** Next.js Server Actions, Zod, Resend API
+- **Deployment:** Vercel
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+- npm or pnpm
+
+### Installation
+
+```bash
 git clone https://github.com/Jejekdf/portofolio.git
 cd portofolio
 npm install
 ```
 
-The commands above clone the repository to your local machine, enter the project directory, and install all dependencies defined in `package.json`.
+### Environment Variables
 
-### Initial Configuration
+Copy `.env.example` to `.env.local`:
 
-To enable the contact form email dispatch functionality, configure your environment variables:
-
-```shell
+```bash
 cp .env.example .env.local
 ```
 
-Open `.env.local` and provide your Resend API credentials:
+Configure your contact form delivery:
 
 ```env
 RESEND_API_KEY=re_your_api_key_here
@@ -31,87 +47,53 @@ CONTACT_TO_EMAIL=maulanarandi531@gmail.com
 CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
 ```
 
-> **Note:** In development mode without an API key, form submissions are logged safely to the server console with simulated success.
+> In development mode, form submissions fallback to console logging if `RESEND_API_KEY` is not provided.
 
-## Developing
+### Development
 
-To start the local development server with Turbopack acceleration:
-
-```shell
+```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to view the application with hot module replacement.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-### Building
+### Production Build
 
-To compile and verify the production bundle:
-
-```shell
-npx tsc --noEmit
+```bash
 npm run build
 ```
 
-This runs strict TypeScript type-checking across the codebase, followed by the Next.js production compiler to generate optimized static pages and standalone assets.
+---
 
-### Deploying / Publishing
+## Architecture Highlights
 
-This project is optimized for zero-configuration deployment on [Vercel](https://vercel.com/):
+- **Decoupled 3D Canvas:** Three.js WebGL canvas runs as an ambient background layer with responsive mouse parallax, throttled frameloop, and explicit GPU resource disposal on unmount.
+- **Server Action Validation:** Contact form submission handles client and server validation via Zod schemas, in-memory IP rate limiting, and server-side DNS MX record checks before sending emails via Resend.
+- **Accessible UI:** Responsive layout with semantic HTML, fluid typography, and 44px minimum touch targets.
 
-```shell
-npx vercel --prod
+---
+
+## Project Structure
+
+```text
+portofolio/
+├── app/
+│   ├── components/
+│   │   ├── canvas/          # Three.js 3D scene & background canvas
+│   │   └── ui/              # Page sections (Hero, Projects, Skills, Contact, Footer)
+│   ├── lib/                 # Zod validation schemas
+│   ├── actions.ts           # Server Actions (Contact form dispatch & DNS check)
+│   ├── globals.css          # Tailwind CSS styles & film grain overlay
+│   ├── layout.tsx           # Root layout & metadata
+│   └── page.tsx             # Single-page portfolio entry
+├── public/                  # Static assets & icons
+└── next.config.ts           # Security headers & Next.js config
 ```
 
-Alternatively, push to your connected `main` branch on GitHub to trigger automatic CI/CD builds and preview deployments.
+---
 
-## Features
+## Author & License
 
-* **Contained WebGL 3D Sculpture**: Native Three.js interactive ribbon canvas with responsive mouse parallax, smooth damping, and automated WebGL resource disposal.
-* **Verified GitHub Architecture**: Real-world projects directly verified from source repository package managers (Next.js 16, Laravel 12, Express 5, Flutter, and ESP32 IoT).
-* **Accreditation Lightbox**: HD certificate gallery featuring curriculum breakdowns for BNSP, Huawei HCIA, IBM Granite, and Cisco accreditations.
-* **3-Tier Contact Verification**:
-  * *Layer 1*: Zod schema validation for strict RFC compliance and valid TLD structures.
-  * *Layer 2*: In-memory blocklist filtering disposable/temporary email addresses.
-  * *Layer 3*: Server-side DNS MX record resolution (`dns.promises.resolveMx`) to verify mail server existence before dispatch.
-* **Security Headers**: Strict Content-Type sniffing prevention (`nosniff`), clickjacking defense (`DENY`), and referrer isolation configured directly in `next.config.ts`.
-* **Zero UI Library Slop**: Clean, hand-crafted Tailwind CSS components with standard 44px minimum tap targets and fluid typography scaling.
+Developed by **Randi Maulana** ([GitHub](https://github.com/Jejekdf) · [LinkedIn](https://www.linkedin.com/in/randi-maulana-dev)).
 
-## Configuration
-
-The application accepts the following environment variables:
-
-#### `RESEND_API_KEY`
-Type: `String`  
-Default: `undefined`  
-Your Resend API key for outbound contact emails.
-
-#### `CONTACT_TO_EMAIL`
-Type: `String`  
-Default: `'maulanarandi531@gmail.com'`  
-The recipient email address where portfolio inquiries are delivered.
-
-#### `CONTACT_FROM_EMAIL`
-Type: `String`  
-Default: `'Portfolio Contact <onboarding@resend.dev>'`  
-The verified sender identity in Resend.
-
-## Contributing
-
-Contributions, issues, and feature requests are welcome.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## Links
-
-- **Live Demo**: [https://portofolio-nu-lemon.vercel.app](https://portofolio-nu-lemon.vercel.app)
-- **GitHub Repository**: [https://github.com/Jejekdf/portofolio](https://github.com/Jejekdf/portofolio)
-- **LinkedIn Profile**: [https://www.linkedin.com/in/randi-maulana-dev](https://www.linkedin.com/in/randi-maulana-dev)
-- **Issue Tracker**: [https://github.com/Jejekdf/portofolio/issues](https://github.com/Jejekdf/portofolio/issues)
-
-## Licensing
-
-This project is open source and available under the [MIT License](LICENSE).
+Distributed under the [MIT License](LICENSE).

@@ -215,7 +215,7 @@ export function Hero3DCanvas() {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]"
+      className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden mask-[linear-gradient(to_bottom,black_80%,transparent_100%)]"
       aria-hidden="true"
     />
   );

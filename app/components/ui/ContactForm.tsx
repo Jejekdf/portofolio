@@ -170,7 +170,7 @@ export function ContactForm() {
                 onBlur={() => handleBlur("name")}
                 placeholder="Your full name"
                 required
-                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-base sm:text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
+                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-base sm:text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-hidden transition-colors duration-150 ${
                   fieldErrors.name
                     ? "border-red-500/80 focus:border-red-500"
                     : touched.name && formData.name.length >= 2
@@ -202,7 +202,7 @@ export function ContactForm() {
                 onBlur={() => handleBlur("email")}
                 placeholder="name@company.com"
                 required
-                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-base sm:text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none transition-colors duration-150 ${
+                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-base sm:text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-hidden transition-colors duration-150 ${
                   fieldErrors.email
                     ? "border-red-500/80 focus:border-red-500"
                     : touched.email && formData.email.includes("@")
@@ -234,7 +234,7 @@ export function ContactForm() {
                 onBlur={() => handleBlur("message")}
                 placeholder="Project details, timeline, or engineering role"
                 required
-                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-base sm:text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-none resize-none transition-colors duration-150 ${
+                className={`w-full px-4 py-3 bg-[#090d0a]/80 border rounded-lg font-mono text-base sm:text-sm text-[#f4f1eb] placeholder:text-[#9e988f]/30 focus:outline-hidden resize-none transition-colors duration-150 ${
                   fieldErrors.message
                     ? "border-red-500/80 focus:border-red-500"
                     : touched.message && formData.message.split(/\s+/).filter(Boolean).length >= 3

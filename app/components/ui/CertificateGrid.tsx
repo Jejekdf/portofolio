@@ -212,7 +212,7 @@ export function CertificateGrid() {
             {cert.image && (
               <div
                 onClick={() => setSelectedCert(cert)}
-                className="relative w-full aspect-[16/10] bg-[#090d0a] overflow-hidden cursor-pointer border-b border-[#1e2a20]/60 group-hover:opacity-90 transition-opacity shrink-0"
+                className="relative w-full aspect-16/10 bg-[#090d0a] overflow-hidden cursor-pointer border-b border-[#1e2a20]/60 group-hover:opacity-90 transition-opacity shrink-0"
               >
                 <Image
                   src={cert.image}
@@ -222,7 +222,7 @@ export function CertificateGrid() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0d120e] via-transparent to-transparent opacity-60 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#0d120e] via-transparent to-transparent opacity-60 pointer-events-none" />
                 <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-[#090d0a]/90 border border-[#1e2a20] text-[#c5a880] font-mono text-xs uppercase tracking-wider inline-flex items-center gap-1">
                   <Eye className="size-3" />
                   <span>View Details</span>
@@ -319,7 +319,7 @@ export function CertificateGrid() {
               <div className="flex-1 overflow-y-auto flex flex-col">
                 {/* Certificate Image Canvas */}
                 {selectedCert.image && (
-                  <div className="relative w-full aspect-[16/10] bg-[#090d0a] border-b border-[#1e2a20]/60 p-2 sm:p-4 flex items-center justify-center">
+                  <div className="relative w-full aspect-16/10 bg-[#090d0a] border-b border-[#1e2a20]/60 p-2 sm:p-4 flex items-center justify-center">
                     <Image
                       src={selectedCert.image}
                       alt={`${selectedCert.title} - ${selectedCert.issuer}`}

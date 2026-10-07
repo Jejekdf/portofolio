@@ -125,8 +125,8 @@ export function Hero3DCanvas() {
       camera.updateProjectionMatrix();
 
       if (width < 768) {
-        group.position.set(0, 0.2, 0);
-        group.scale.setScalar(0.8);
+        group.position.set(0, 0.75, -0.6);
+        group.scale.setScalar(0.7);
       } else {
         group.position.set(1.4, 0, 0);
         group.scale.setScalar(1.0);
@@ -158,7 +158,7 @@ export function Hero3DCanvas() {
 
         group.rotation.y = THREE.MathUtils.damp(group.rotation.y, mouse.currentX * 0.8, 3.0, delta);
         group.rotation.x = THREE.MathUtils.damp(group.rotation.x, mouse.currentY * 0.8, 3.0, delta);
-        group.position.y = (container.clientWidth < 768 ? 0.2 : 0) + Math.sin(elapsed * 0.8) * 0.08;
+        group.position.y = (container.clientWidth < 768 ? 0.75 : 0) + Math.sin(elapsed * 0.8) * 0.08;
 
         knotMesh.rotation.x = elapsed * 0.14;
         knotMesh.rotation.y = elapsed * 0.22;

@@ -67,12 +67,12 @@ export function HeroSection() {
           </div>
 
           {/* Direct Social Links (44px touch target) */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-3">
             <a
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs sm:text-sm tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 min-h-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs sm:text-sm tracking-wider transition-colors duration-150 whitespace-nowrap"
             >
               <GithubIcon className="size-4" />
               <span>GitHub</span>
@@ -81,14 +81,14 @@ export function HeroSection() {
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs sm:text-sm tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 min-h-11 justify-center text-[#9e988f] hover:text-[#f4f1eb] font-mono text-xs sm:text-sm tracking-wider transition-colors duration-150 whitespace-nowrap"
             >
               <LinkedinIcon className="size-4" />
               <span>LinkedIn</span>
             </a>
             <a
               href={`mailto:${email}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-11 min-w-11 justify-center text-[#9e988f] hover:text-[#c5a880] font-mono text-xs sm:text-sm tracking-wider transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 min-h-11 justify-center text-[#9e988f] hover:text-[#c5a880] font-mono text-xs sm:text-sm tracking-wider transition-colors duration-150 whitespace-nowrap"
             >
               <Mail className="size-4" />
               <span>Email</span>
@@ -100,15 +100,15 @@ export function HeroSection() {
         <div className="flex flex-col gap-6 max-w-5xl 2xl:max-w-6xl">
           <motion.h1
             variants={nameVariant}
-            className="font-bold uppercase tracking-tight leading-[0.88] text-[#f4f1eb] text-balance"
-            style={{ fontSize: "clamp(3.5rem, 10.5vw, 9.5rem)" }}
+            className="font-bold uppercase tracking-tight leading-[0.92] text-[#f4f1eb] text-balance font-sans"
+            style={{ fontSize: "clamp(2.75rem, 10vw, 9.5rem)" }}
           >
             Randi<br />Maulana
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="text-base sm:text-lg lg:text-xl text-[#9e988f] max-w-3xl lg:max-w-4xl leading-relaxed text-pretty font-light"
+            className="text-base sm:text-lg lg:text-xl text-[#d4cfc7] max-w-3xl lg:max-w-4xl leading-relaxed text-pretty font-normal"
           >
             Fullstack software engineer specialized in high-performance web systems, resilient backend APIs, and scalable database architectures using Next.js 16, React 19, TypeScript, PHP, Laravel, and PostgreSQL.
           </motion.p>
@@ -118,16 +118,16 @@ export function HeroSection() {
         <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
           <button
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-7 py-3.5 min-h-11 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 cursor-pointer shadow-lg shadow-[#c5a880]/10"
+            className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 min-h-11 bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#f4f1eb] transition-colors duration-150 cursor-pointer shadow-lg shadow-[#c5a880]/10 whitespace-nowrap"
           >
-            View Projects
+            <span>View Projects</span>
             <ArrowUpRight className="size-3.5" />
           </button>
           <a
             href="/CV_Randi.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3.5 min-h-11 border border-[#1e2a20] text-[#f4f1eb] font-mono text-xs tracking-widest uppercase hover:border-[#c5a880] hover:text-[#c5a880] transition-colors duration-150"
+            className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 min-h-11 border border-[#1e2a20] text-[#f4f1eb] font-mono text-xs tracking-widest uppercase hover:border-[#c5a880] hover:text-[#c5a880] transition-colors duration-150 whitespace-nowrap"
           >
             <FileText className="size-3.5" />
             <span>Download Resume</span>

@@ -245,7 +245,7 @@ export function CertificateGrid() {
                 <div className="h-10 flex items-center">
                   <h3
                     onClick={() => setSelectedCert(cert)}
-                    className="font-mono text-sm sm:text-base font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-150 cursor-pointer leading-snug line-clamp-2"
+                    className="font-sans text-sm sm:text-base font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-150 cursor-pointer leading-snug line-clamp-2 tracking-tight"
                   >
                     {cert.title}
                   </h3>

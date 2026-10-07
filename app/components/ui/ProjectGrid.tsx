@@ -132,14 +132,14 @@ export function ProjectGrid() {
           <div className="relative z-10 flex flex-col gap-6">
             {/* Header Meta */}
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-wide">
+              <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-wider uppercase">
                 {featuredProject.scope}
               </span>
             </div>
 
             {/* Title & Description */}
             <div className="flex flex-col gap-3 max-w-4xl 2xl:max-w-5xl">
-              <h3 className="font-mono text-2xl sm:text-3xl font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-200 uppercase tracking-wide">
+              <h3 className="font-sans text-2xl sm:text-3xl font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-200 uppercase tracking-tight">
                 {featuredProject.title}
               </h3>
               <p className="text-sm sm:text-base text-[#9e988f] leading-relaxed text-pretty font-light">
@@ -160,13 +160,13 @@ export function ProjectGrid() {
                 ))}
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0 pt-2 sm:pt-0">
                 {featuredProject.demo && (
                   <a
                     href={featuredProject.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#f4f1eb] transition-colors duration-150 shadow-md"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 min-h-10 rounded-lg bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#f4f1eb] transition-colors duration-150 shadow-xs whitespace-nowrap"
                   >
                     <span>Live Demo</span>
                     <ArrowUpRight className="size-3.5" />
@@ -176,7 +176,7 @@ export function ProjectGrid() {
                   href={featuredProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg border border-[#1e2a20] font-mono text-xs uppercase tracking-wider text-[#9e988f] hover:text-[#f4f1eb] hover:border-[#c5a880] transition-colors duration-150"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 min-h-10 rounded-lg border border-[#1e2a20] font-mono text-xs uppercase tracking-wider text-[#9e988f] hover:text-[#f4f1eb] hover:border-[#c5a880] transition-colors duration-150 whitespace-nowrap"
                 >
                   <span>Source Code</span>
                   <ExternalLink className="size-3.5" />
@@ -199,8 +199,8 @@ export function ProjectGrid() {
               className="group relative p-6 sm:p-8 rounded-2xl bg-[#0d120e]/80 border border-[#1e2a20] hover:border-[#c5a880]/50 transition-all duration-300 backdrop-blur-md flex flex-col justify-between gap-6"
             >
               <div className="flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-[#c5a880] font-medium uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-mono text-xs text-[#c5a880] font-medium uppercase tracking-wider truncate">
                     {project.scope}
                   </span>
                   <a
@@ -208,14 +208,14 @@ export function ProjectGrid() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`View ${project.title} on ${project.demo ? "Live Demo" : "GitHub"}`}
-                    className="text-[#9e988f] hover:text-[#c5a880] transition-colors duration-150"
+                    className="text-[#9e988f] hover:text-[#c5a880] transition-colors duration-150 p-1 shrink-0"
                   >
                     <ExternalLink className="size-4" />
                   </a>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <h3 className="font-mono text-xl font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-200 uppercase tracking-wide">
+                  <h3 className="font-sans text-xl font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-200 uppercase tracking-tight">
                     {project.title}
                   </h3>
                 </div>
@@ -237,13 +237,13 @@ export function ProjectGrid() {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-3 pt-1">
+                <div className="flex flex-wrap items-center gap-2.5 pt-1">
                   {project.demo && (
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#f4f1eb] transition-colors duration-150 shadow-xs"
+                      className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 min-h-9 rounded-lg bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#f4f1eb] transition-colors duration-150 shadow-xs whitespace-nowrap"
                     >
                       <span>Live Demo</span>
                       <ArrowUpRight className="size-3.5" />
@@ -253,7 +253,7 @@ export function ProjectGrid() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-[#1e2a20] font-mono text-xs uppercase tracking-wider text-[#9e988f] hover:text-[#f4f1eb] hover:border-[#c5a880] transition-colors duration-150"
+                    className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 min-h-9 rounded-lg border border-[#1e2a20] font-mono text-xs uppercase tracking-wider text-[#9e988f] hover:text-[#f4f1eb] hover:border-[#c5a880] transition-colors duration-150 whitespace-nowrap"
                   >
                     <span>Source Code</span>
                     <ExternalLink className="size-3.5" />

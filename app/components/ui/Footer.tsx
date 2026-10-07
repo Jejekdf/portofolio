@@ -21,12 +21,12 @@ export function Footer() {
           <ArrowUp className="size-3.5 transition-transform duration-150 group-hover:-translate-y-0.5" />
         </button>
 
-        <nav aria-label="Footer Navigation" className="flex items-center justify-center gap-6 text-xs text-[#9e988f]">
+        <nav aria-label="Footer Navigation" className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-[#9e988f]">
           <a
             href="https://github.com/Jejekdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[#f4f1eb] transition-colors duration-150 py-1"
+            className="hover:text-[#f4f1eb] transition-colors duration-150 py-2.5 px-2 inline-flex items-center min-h-11"
           >
             GitHub
           </a>
@@ -34,13 +34,13 @@ export function Footer() {
             href="https://www.linkedin.com/in/randi-maulana-dev"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[#f4f1eb] transition-colors duration-150 py-1"
+            className="hover:text-[#f4f1eb] transition-colors duration-150 py-2.5 px-2 inline-flex items-center min-h-11"
           >
             LinkedIn
           </a>
           <a
             href="mailto:maulanarandi531@gmail.com"
-            className="hover:text-[#f4f1eb] transition-colors duration-150 py-1"
+            className="hover:text-[#f4f1eb] transition-colors duration-150 py-2.5 px-2 inline-flex items-center min-h-11"
           >
             Email
           </a>

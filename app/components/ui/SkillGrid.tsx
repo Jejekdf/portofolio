@@ -106,7 +106,7 @@ export function SkillGrid() {
               </div>
 
               <div className="flex flex-col gap-1">
-                <h3 className="font-mono text-base sm:text-lg font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-150 uppercase tracking-wide">
+                <h3 className="font-sans text-base sm:text-lg font-bold text-[#f4f1eb] group-hover:text-[#c5a880] transition-colors duration-150 uppercase tracking-tight">
                   {category}
                 </h3>
                 <p className="font-mono text-xs text-[#9e988f] leading-relaxed">

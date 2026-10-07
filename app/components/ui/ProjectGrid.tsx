@@ -19,9 +19,9 @@ const PROJECTS: (Project & { scope: string; featured?: boolean })[] = [
   {
     id: "punchline",
     title: "Punchline",
-    scope: "Client-Side Meme Engine",
+    scope: "Meme Creator Canvas Engine",
     description:
-      "High-performance browser meme generator engineered with Svelte 5 runes and HTML5 Canvas API, featuring 390+ curated templates, multi-touch bounding box transforms, automatic layout presets, and zero-server client export.",
+      "Browser meme generator built with Svelte 5 runes and HTML5 Canvas API. Features 390 curated templates, dynamic text layer manipulation, automatic layout presets, and direct client image export.",
     tags: ["Svelte 5", "HTML5 Canvas", "Vite", "TypeScript", "Tailwind CSS", "Vercel"],
     github: "https://github.com/Jejekdf/punchline",
     demo: "https://punchline.rnm.biz.id/",
@@ -95,21 +95,21 @@ export function ProjectGrid() {
       viewport={{ once: true, margin: "-60px" }}
     >
       {/* Editorial Scene Header */}
-      <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-10">
-        <div>
+      <div className="border-b border-[#1e2a20] pb-4 mb-10">
+        <div className="flex items-center justify-between gap-4">
           <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
             Portfolio
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-1 text-balance">
-            Featured Systems
-          </h2>
-          <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
-            Production web platforms, API gateways, and mobile IoT systems
-          </p>
+          <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase shrink-0 whitespace-nowrap">
+            {PROJECTS.length} Systems
+          </span>
         </div>
-        <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase">
-          {PROJECTS.length} Systems
-        </span>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-2 text-balance">
+          Featured Systems
+        </h2>
+        <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
+          Production web platforms, API gateways, and mobile IoT systems
+        </p>
       </div>
 
       {/* Cinematic Bento Grid Layout */}
@@ -237,26 +237,26 @@ export function ProjectGrid() {
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between pt-1">
-                  {project.demo ? (
+                <div className="flex items-center gap-3 pt-1">
+                  {project.demo && (
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[#c5a880] hover:text-[#f4f1eb] transition-colors duration-150 font-semibold"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#c5a880] text-[#090d0a] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#f4f1eb] transition-colors duration-150 shadow-xs"
                     >
                       <span>Live Demo</span>
-                      <ArrowUpRight className="size-3" />
+                      <ArrowUpRight className="size-3.5" />
                     </a>
-                  ) : <span />}
+                  )}
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[#9e988f] hover:text-[#f4f1eb] transition-colors duration-150"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-[#1e2a20] font-mono text-xs uppercase tracking-wider text-[#9e988f] hover:text-[#f4f1eb] hover:border-[#c5a880] transition-colors duration-150"
                   >
-                    <span>View GitHub</span>
-                    <ArrowUpRight className="size-3" />
+                    <span>Source Code</span>
+                    <ExternalLink className="size-3.5" />
                   </a>
                 </div>
               </div>

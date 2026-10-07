@@ -179,21 +179,21 @@ export function CertificateGrid() {
       viewport={{ once: true, margin: "-60px" }}
     >
       {/* Editorial Scene Header */}
-      <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-10">
-        <div>
+      <div className="border-b border-[#1e2a20] pb-4 mb-10">
+        <div className="flex items-center justify-between gap-4">
           <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
             Credentials
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-1 text-balance">
-            Verified Certifications
-          </h2>
-          <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
-            Industry accreditations and validated technical competencies
-          </p>
+          <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase shrink-0 whitespace-nowrap">
+            {CERTIFICATES.length} Verified
+          </span>
         </div>
-        <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase">
-          {CERTIFICATES.length} Verified
-        </span>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-2 text-balance">
+          Verified Certifications
+        </h2>
+        <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
+          Industry accreditations and validated technical competencies
+        </p>
       </div>
 
       {/* Visual Certificate Cards Grid (Adapts from 1 to 4 columns) */}

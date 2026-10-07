@@ -89,21 +89,21 @@ export function ContactForm() {
       viewport={{ once: true, margin: "-60px" }}
     >
       {/* Editorial Section Header */}
-      <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-10">
-        <div>
+      <div className="border-b border-[#1e2a20] pb-4 mb-10">
+        <div className="flex items-center justify-between gap-4">
           <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
             Communication
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-1 text-balance">
-            Get In Touch
-          </h2>
-          <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
-            Available for fullstack engineering roles and consulting
-          </p>
+          <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase shrink-0 whitespace-nowrap">
+            Open to Work
+          </span>
         </div>
-        <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase">
-          Open to Work
-        </span>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-2 text-balance">
+          Get In Touch
+        </h2>
+        <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
+          Available for fullstack engineering roles and consulting
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">

@@ -65,21 +65,21 @@ export function SkillGrid() {
       viewport={{ once: true, margin: "-60px" }}
     >
       {/* Editorial Scene Header */}
-      <div className="flex items-baseline justify-between border-b border-[#1e2a20] pb-4 mb-10">
-        <div>
+      <div className="border-b border-[#1e2a20] pb-4 mb-10">
+        <div className="flex items-center justify-between gap-4">
           <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
             Technical Stack
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-1 text-balance">
-            Capabilities Matrix
-          </h2>
-          <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
-            Core engineering domains and technologies
-          </p>
+          <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase shrink-0 whitespace-nowrap">
+            4 Domains
+          </span>
         </div>
-        <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase">
-          4 Domains
-        </span>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-2 text-balance">
+          Capabilities Matrix
+        </h2>
+        <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
+          Core engineering domains and technologies
+        </p>
       </div>
 
       {/* 4-Quadrant Architecture Cards Grid (Expands to 4-cols on laptop & desktop) */}

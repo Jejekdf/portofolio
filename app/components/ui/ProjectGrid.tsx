@@ -17,6 +17,16 @@ const PROJECTS: (Project & { scope: string; featured?: boolean })[] = [
     featured: true,
   },
   {
+    id: "punchline",
+    title: "Punchline",
+    scope: "Client-Side Meme Engine",
+    description:
+      "High-performance browser meme generator engineered with Svelte 5 runes and HTML5 Canvas API, featuring 390+ curated templates, multi-touch bounding box transforms, automatic layout presets, and zero-server client export.",
+    tags: ["Svelte 5", "HTML5 Canvas", "Vite", "TypeScript", "Tailwind CSS", "Vercel"],
+    github: "https://github.com/Jejekdf/punchline",
+    demo: "https://punchline.rnm.biz.id/",
+  },
+  {
     id: "gemini-flash-api",
     title: "Gemini Flash API Gateway",
     scope: "High-Throughput AI Proxy",
@@ -176,8 +186,8 @@ export function ProjectGrid() {
           </div>
         </motion.article>
 
-        {/* 2. Side-by-Side 4-Column Bento Cards on Desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        {/* 2. Side-by-Side Bento Cards on Desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sideProjects.map((project, idx) => (
             <motion.article
               key={project.id}
@@ -194,10 +204,10 @@ export function ProjectGrid() {
                     {project.scope}
                   </span>
                   <a
-                    href={project.github}
+                    href={project.demo || project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`View ${project.title} source code on GitHub`}
+                    aria-label={`View ${project.title} on ${project.demo ? "Live Demo" : "GitHub"}`}
                     className="text-[#9e988f] hover:text-[#c5a880] transition-colors duration-150"
                   >
                     <ExternalLink className="size-4" />
@@ -227,12 +237,23 @@ export function ProjectGrid() {
                   ))}
                 </div>
 
-                <div className="flex items-center justify-end pt-1">
+                <div className="flex items-center justify-between pt-1">
+                  {project.demo ? (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[#c5a880] hover:text-[#f4f1eb] transition-colors duration-150 font-semibold"
+                    >
+                      <span>Live Demo</span>
+                      <ArrowUpRight className="size-3" />
+                    </a>
+                  ) : <span />}
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[#c5a880] hover:text-[#f4f1eb] transition-colors duration-150"
+                    className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[#9e988f] hover:text-[#f4f1eb] transition-colors duration-150"
                   >
                     <span>View GitHub</span>
                     <ArrowUpRight className="size-3" />

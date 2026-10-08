@@ -18,13 +18,13 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     category: "Frontend Architecture",
     scope: "High-performance reactive interfaces",
     icon: Code2,
-    items: ["Next.js 16", "React 19", "TypeScript", "Three.js", "Tailwind CSS", "Framer Motion"],
+    items: ["Next.js 16", "React 19", "Svelte 5", "TypeScript", "Tailwind CSS", "Three.js", "Framer Motion"],
   },
   {
     category: "Backend Architecture",
     scope: "Resilient APIs and business logic",
     icon: Server,
-    items: ["PHP", "Laravel", "Node.js", "REST APIs", "Server Actions", "WebSockets"],
+    items: ["PHP", "Laravel 12", "Node.js", "Express", "Filament v3", "REST APIs"],
   },
   {
     category: "Database & Cloud",
@@ -33,12 +33,13 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     items: ["PostgreSQL", "MySQL", "Supabase", "Prisma ORM", "Redis", "Vercel"],
   },
   {
-    category: "AI & Workflows",
-    scope: "LLM pipelines and tooling",
+    category: "DevOps & AI Systems",
+    scope: "Infrastructure and AI pipelines",
     icon: BrainCircuit,
-    items: ["Google GenAI SDK", "Prompt Pipelines", "Git", "Resend API", "Linux", "Postman"],
+    items: ["Docker", "Linux", "Git", "Google GenAI SDK", "Prompt Pipelines", "Postman"],
   },
 ];
+
 
 
 

@@ -3,16 +3,8 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import type { SectionId } from "@/app/types";
+import { MonogramIcon } from "@/app/components/ui/Icons";
 
-function MonogramIcon({ className = "size-4" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M8 23V9H14.5C16.9853 9 19 11.0147 19 13.5C19 15.9853 16.9853 18 14.5 18H8" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M13.5 18L18.5 23" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"/>
-      <path d="M18.5 23L23.5 13.5V23" stroke="#F4F1EB" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.9"/>
-    </svg>
-  );
-}
 
 const NAV_ITEMS: { label: string; id: SectionId }[] = [
   { label: "About", id: "hero" },

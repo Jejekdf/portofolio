@@ -2,6 +2,9 @@
 
 import { motion, type Variants } from "framer-motion";
 import { Code2, Server, Database, BrainCircuit } from "lucide-react";
+import { SectionHeader } from "@/app/components/ui/SectionHeader";
+import { TechBadge } from "@/app/components/ui/TechBadge";
+
 
 interface SkillCategory {
   category: string;
@@ -37,6 +40,8 @@ const SKILL_CATEGORIES: SkillCategory[] = [
   },
 ];
 
+
+
 const CINEMATIC_EASE = [0.16, 1, 0.3, 1] as const;
 
 const sectionVariant: Variants = {
@@ -65,22 +70,12 @@ export function SkillGrid() {
       viewport={{ once: true, margin: "-60px" }}
     >
       {/* Editorial Scene Header */}
-      <div className="border-b border-[#1e2a20] pb-4 mb-10">
-        <div className="flex items-center justify-between gap-4">
-          <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
-            Technical Stack
-          </span>
-          <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase shrink-0 whitespace-nowrap">
-            4 Domains
-          </span>
-        </div>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-2 text-balance">
-          Capabilities Matrix
-        </h2>
-        <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
-          Core engineering domains and technologies
-        </p>
-      </div>
+      <SectionHeader
+        badge="Technical Stack"
+        count="4 Domains"
+        title="Capabilities Matrix"
+        description="Core engineering domains and technologies"
+      />
 
       {/* 4-Quadrant Architecture Cards Grid (Expands to 4-cols on laptop & desktop) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -118,12 +113,9 @@ export function SkillGrid() {
             {/* Skills Pills Matrix */}
             <div className="flex flex-wrap gap-2 pt-4 border-t border-[#1e2a20]/60">
               {items.map((item) => (
-                <span
-                  key={item}
-                  className="inline-flex items-center px-3 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/30 font-mono text-xs text-[#f4f1eb] group-hover:border-[#c5a880]/30 transition-colors duration-150"
-                >
+                <TechBadge key={item} variant="solid">
                   {item}
-                </span>
+                </TechBadge>
               ))}
             </div>
           </motion.div>

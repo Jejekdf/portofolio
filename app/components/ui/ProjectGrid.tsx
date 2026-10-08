@@ -3,6 +3,9 @@
 import { motion, type Variants } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import type { Project } from "@/app/types";
+import { SectionHeader } from "@/app/components/ui/SectionHeader";
+import { TechBadge } from "@/app/components/ui/TechBadge";
+
 
 const PROJECTS: (Project & { scope: string; featured?: boolean })[] = [
   {
@@ -95,22 +98,12 @@ export function ProjectGrid() {
       viewport={{ once: true, margin: "-60px" }}
     >
       {/* Editorial Scene Header */}
-      <div className="border-b border-[#1e2a20] pb-4 mb-10">
-        <div className="flex items-center justify-between gap-4">
-          <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
-            Portfolio
-          </span>
-          <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase shrink-0 whitespace-nowrap">
-            {PROJECTS.length} Systems
-          </span>
-        </div>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-2 text-balance">
-          Featured Systems
-        </h2>
-        <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
-          Production web platforms, API gateways, and mobile IoT systems
-        </p>
-      </div>
+      <SectionHeader
+        badge="Portfolio"
+        count={`${PROJECTS.length} Systems`}
+        title="Featured Systems"
+        description="Production web platforms, API gateways, and mobile IoT systems"
+      />
 
       {/* Cinematic Bento Grid Layout */}
       <div className="flex flex-col gap-6">
@@ -151,12 +144,7 @@ export function ProjectGrid() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-[#1e2a20]/60">
               <div className="flex flex-wrap items-center gap-1.5">
                 {featuredProject.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="inline-flex items-center px-3 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/40 font-mono text-xs text-[#9e988f] group-hover:border-[#c5a880]/30 group-hover:text-[#f4f1eb] transition-colors duration-150"
-                  >
-                    {tag}
-                  </span>
+                  <TechBadge key={tag}>{tag}</TechBadge>
                 ))}
               </div>
 
@@ -228,12 +216,7 @@ export function ProjectGrid() {
               <div className="flex flex-col gap-4 pt-4 border-t border-[#1e2a20]/60">
                 <div className="flex flex-wrap items-center gap-1.5">
                   {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center px-3 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/40 font-mono text-xs text-[#9e988f] group-hover:border-[#c5a880]/30 group-hover:text-[#f4f1eb] transition-colors duration-150"
-                    >
-                      {tag}
-                    </span>
+                    <TechBadge key={tag}>{tag}</TechBadge>
                   ))}
                 </div>
 

@@ -5,6 +5,8 @@ import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Mail, ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { sendContactEmail, type ContactActionResult } from "@/app/actions";
 import { LinkedinIcon, GithubIcon } from "@/app/components/ui/Icons";
+import { SectionHeader } from "@/app/components/ui/SectionHeader";
+
 
 const CINEMATIC_EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -89,22 +91,12 @@ export function ContactForm() {
       viewport={{ once: true, margin: "-60px" }}
     >
       {/* Editorial Section Header */}
-      <div className="border-b border-[#1e2a20] pb-4 mb-10">
-        <div className="flex items-center justify-between gap-4">
-          <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
-            Communication
-          </span>
-          <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase shrink-0 whitespace-nowrap">
-            Open to Work
-          </span>
-        </div>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-2 text-balance">
-          Get In Touch
-        </h2>
-        <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
-          Available for fullstack engineering roles and consulting
-        </p>
-      </div>
+      <SectionHeader
+        badge="Communication"
+        count="Open to Work"
+        title="Get In Touch"
+        description="Available for fullstack engineering roles and consulting"
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         {/* Left Column: Direct Communication Cards */}

@@ -5,6 +5,9 @@ import Image from "next/image";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Eye, X, CheckCircle2 } from "lucide-react";
 import type { Certificate } from "@/app/types";
+import { SectionHeader } from "@/app/components/ui/SectionHeader";
+import { TechBadge } from "@/app/components/ui/TechBadge";
+
 
 const CERTIFICATES: Certificate[] = [
   {
@@ -179,22 +182,12 @@ export function CertificateGrid() {
       viewport={{ once: true, margin: "-60px" }}
     >
       {/* Editorial Scene Header */}
-      <div className="border-b border-[#1e2a20] pb-4 mb-10">
-        <div className="flex items-center justify-between gap-4">
-          <span className="font-mono text-xs text-[#c5a880] font-semibold tracking-[0.25em] uppercase">
-            Credentials
-          </span>
-          <span className="font-mono text-xs sm:text-sm text-[#c5a880] tracking-widest uppercase shrink-0 whitespace-nowrap">
-            {CERTIFICATES.length} Verified
-          </span>
-        </div>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-[#f4f1eb] mt-2 text-balance">
-          Verified Certifications
-        </h2>
-        <p className="font-mono text-xs sm:text-sm text-[#9e988f] mt-1">
-          Industry accreditations and validated technical competencies
-        </p>
-      </div>
+      <SectionHeader
+        badge="Credentials"
+        count={`${CERTIFICATES.length} Verified`}
+        title="Verified Certifications"
+        description="Industry accreditations and validated technical competencies"
+      />
 
       {/* Visual Certificate Cards Grid (Adapts from 1 to 4 columns) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 items-stretch">
@@ -256,12 +249,9 @@ export function CertificateGrid() {
               <div className="pt-3 border-t border-[#1e2a20]/60 mt-auto">
                 <div className="flex flex-wrap gap-1.5 h-7 overflow-hidden items-center">
                   {cert.skills.slice(0, 2).map((skill) => (
-                    <span
-                      key={skill}
-                      className="inline-flex items-center px-2.5 py-0.5 rounded border border-[#1e2a20] bg-[#1e2a20]/30 font-mono text-xs text-[#9e988f] whitespace-nowrap"
-                    >
+                    <TechBadge key={skill} size="sm">
                       {skill}
-                    </span>
+                    </TechBadge>
                   ))}
                   {cert.skills.length > 2 && (
                     <span className="font-mono text-xs text-[#9e988f]/50 whitespace-nowrap">
@@ -358,12 +348,9 @@ export function CertificateGrid() {
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {selectedCert.skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-2.5 py-1 rounded-full border border-[#1e2a20] bg-[#1e2a20]/40 font-mono text-xs text-[#f4f1eb]"
-                        >
+                        <TechBadge key={skill} variant="solid">
                           {skill}
-                        </span>
+                        </TechBadge>
                       ))}
                     </div>
                   </div>
